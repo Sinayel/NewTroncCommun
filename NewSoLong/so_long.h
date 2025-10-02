@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:30:51 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/02 11:25:13 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/02 18:50:18 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct s_data
     int y;
     int spawn_x;
     int spawn_y;
+    int count_c;
+    int found_c;
     char **map;
     void *img;
     char *addr;

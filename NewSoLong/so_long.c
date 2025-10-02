@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:01:30 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/02 11:37:00 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/02 19:01:28 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,22 @@ int print_error(int i)
 {
     if (i == 1)
     {
-        printf("\nMap Error\n");
+        printf("Error\nYou have to put the same len of each line for the map\n");
         return 0;
     }
     else if (i == 2)
     {
-        printf("Parsing Error\n");
+        printf("Error\nWrong map maybe try to lock the map\n");
         return 0;
     }
     else if (i == 3)
     {
-        printf("Check Path Error\n");
+        printf("Error\nAll the object as to be foundable\n");
+        return 0;
+    }
+    else if(i == 4)
+    {
+        printf("Error too many P or E\n");
         return 0;
     }
     return 0;
@@ -68,27 +73,28 @@ int count_lines(char *url_map)
     return (count);
 }
 
-char *clean_line(char *str)
-{
-    int i;
-    int j;
-    i = 0;
-    j = 0;
-    while (str[i] == ' ' || str[i] == '\t')
-        i++;
-    char *clean;
-    clean = malloc(sizeof(char) * (ft_strlen_map(str + i) + 1));
-    if (!clean)
-        return NULL;
-    while (str[i])
-    {
-        clean[j++] = str[i];
-        i++;
-    }
-    clean[j] = '\0';
-    free(str);
-    return clean;
-}
+//? (Au cas ou) sert a enlever les tabs et espace au debut de la map
+// char *clean_line(char *str)
+// {
+//     int i;
+//     int j;
+//     i = 0;
+//     j = 0;
+//     while (str[i] == ' ' || str[i] == '\t')
+//         i++;
+//     char *clean;
+//     clean = malloc(sizeof(char) * (ft_strlen_map(str + i) + 1));
+//     if (!clean)
+//         return NULL;
+//     while (str[i])
+//     {
+//         clean[j++] = str[i];
+//         i++;
+//     }
+//     clean[j] = '\0';
+//     free(str);
+//     return clean;
+// }
 
 int init_map(char *url_map)
 {
@@ -97,22 +103,31 @@ int init_map(char *url_map)
         return 0;
     t_env *env;
     env = get_data();
-    env->img.x = 0;
     env->img.map = malloc(sizeof(char *) * (count_lines(url_map) + 1));
     char *line;
     int len;
+    int test = 0;
     while ((line = get_next_line(fd)))
     {
         if (*line == '\0')
+        {
+            free(line);
             continue;
-        line = clean_line(line);
+        }
+        // line = clean_line(line);
         env->img.map[env->img.x] = line;
         if (env->img.x == 0)
             len = ft_strlen_map(env->img.map[env->img.x]);
         env->img.y = ft_strlen_map(env->img.map[env->img.x]);
         if (len != env->img.y)
-            return print_error(1);
+            print_error(1);
         env->img.x++;
+    }
+    if(test == 1)
+    {
+        free(line);
+        env->img.map[env->img.x] = NULL;
+        close(fd);
     }
     env->img.map[env->img.x] = NULL;
     close(fd);
@@ -129,11 +144,24 @@ void print_map()
         printf("%s\n", env->img.map[x]);
 }
 
+void define_spawn(t_env *env, int x, int y, char **map, int *count)
+{
+    if (map[x][y] == 'P')
+    {
+        env->img.spawn_x = x;
+        env->img.spawn_y = y;
+    }
+    if (map[x][y] == 'C')
+        env->img.count_c++;
+    else
+        (*count)++;
+}
+
 int parsing(t_env *env)
 {
     int x;
     int y;
-    int seen[256] = {0};
+    int count;
     x = 0;
     y = 0;
     count = 0;
@@ -142,26 +170,23 @@ int parsing(t_env *env)
         y = 0;
         while (env->img.map[x][y])
         {
-            if(count > 2)
-                return (print_error(2));
             if (env->img.map[x][y] != '1' && (x == 0 || x == (env->img.x - 1) || env->img.map[x][0] != '1' || env->img.map[x][env->img.y - 1] != '1'))
                 return (print_error(2));
-            if(env->img.map[x][y] == 'P' || env->img.map[x][y] == 'E' && !seen[env->img.map[x][y]])
-                count++;
-            if(env->img.map[x][y] == 'P')
-            {
-                env->img.spawn_x = x;
-                env->img.spawn_y = y;
-            }
+            if (env->img.map[x][y] == 'P' || env->img.map[x][y] == 'E' || env->img.map[x][y] == 'C')
+                define_spawn(env, x, y, env->img.map, &count);
             y++;
         }
         x++;
     }
+    if (count != 2)
+        return print_error(4);
     return 1;
 }
 
-void flood_fill(char **map, int x, int y, int *found_p, int *found_e, int *found_c)
+void check_path(char **map, int x, int y, int *found_p, int *found_e)
 {
+    t_env *env;
+    env = get_data();
     if (x < 0 || y < 0 || !map[x] || map[x][y] == '\0')
         return;
     if (map[x][y] == '1' || map[x][y] == 'V')
@@ -171,12 +196,25 @@ void flood_fill(char **map, int x, int y, int *found_p, int *found_e, int *found
     if (map[x][y] == 'E')
         *found_e = 1;
     if (map[x][y] == 'C')
-        *found_c = 1;
-    map[x][y] = 'V'; // marquer visité
-    flood_fill(map, x - 1, y, found_p, found_e, found_c);
-    flood_fill(map, x + 1, y, found_p, found_e, found_c);
-    flood_fill(map, x, y - 1, found_p, found_e, found_c);
-    flood_fill(map, x, y + 1, found_p, found_e, found_c);
+        env->img.found_c++;
+    map[x][y] = 'V';
+    check_path(map, x - 1, y, found_p, found_e);
+    check_path(map, x, y + 1, found_p, found_e);
+    check_path(map, x + 1, y, found_p, found_e);
+    check_path(map, x, y - 1, found_p, found_e);
+}
+
+void free_map(char **map)
+{
+    int i = 0;
+    if (!map)
+        return;
+    while (map[i])
+    {
+        free(map[i]);
+        i++;
+    }
+    free(map);
 }
 
 char **copy_map(t_env *env)
@@ -189,38 +227,54 @@ char **copy_map(t_env *env)
     return copy;
 }
 
+void init_all(t_env *env, int *found_e, int *found_p)
+{
+    env->img.count_c = 0;
+    env->img.found_c = 0;
+    env->img.x = 0;
+    *found_e = 0;
+    *found_p = 0;
+}
 
 int main(int argc, char *argv[])
 {
     t_env *env;
     env = get_data();
+    int found_p;
+    int found_e;
+    init_all(env, &found_e, &found_p);
     if (argc == 2)
     {
         if (init_map(argv[1])) //* Init Map Fini
+        {
+            char **cpy_map = copy_map(env);
             printf("init map : OK\n");
-        if (parsing(env)) //* Parsing Fini
-            printf("Parsing : OK\n");
-        int found_p, found_e, found_c;
-        found_c = 0;
-        found_e = 0;
-        found_p = 0;
-        char **cpy_map = copy_map(env);
-        printf("x = %d | y = %d\n", env->img.spawn_x, env->img.spawn_y);
-        flood_fill(cpy_map, env->img.spawn_x, env->img.spawn_y, &found_p, &found_e, &found_c);
-        printf("e = %d | c = %d | p = %d\n", found_e, found_c, found_p); //TODO: Trouve seulement 1 seul obj C, P ou E
-        if(found_c && found_e && found_p)
-            printf("Flood fill : OK\n\n");
-        // if (check_path(env)) //! Check Path en travaux (il marche pas)
-        //     printf("Path : OK\n\n");
-
-        print_map();
+            if (parsing(env)) //* Parsing Fini
+            {
+                printf("Parsing : OK\n");
+                check_path(cpy_map, env->img.spawn_x, env->img.spawn_y, &found_p, &found_e); //* Parsing des obj Fini
+                if (env->img.found_c == env->img.count_c && found_e && found_p)
+                    printf("Check Path : OK\n\n");
+                else
+                    print_error(3);
+                if(cpy_map)
+                    free_map(cpy_map);
+                // printf("count c = %d | c = %d\n", env->img.count_c, found_c);
+                
+            }
+        }
+        if(env->img.map)
+        {
+            print_map();
+            free_map(env->img.map);
+        }
     }
-    // env.mlx = mlx_init();
-    // env.img.x = 1920;
-    // env.img.y = 1080;
-    // env.win = mlx_new_window(env.mlx, env.img.x, env.img.y, "So Long");
-    // env.img.img = mlx_new_image(env.mlx, env.img.x, env.img.y);
+    env->mlx = mlx_init();
+    env->img.x = 1920;
+    env->img.y = 1080;
+    env->win = mlx_new_window(env->mlx, env->img.x, env->img.y, "So Long");
+    env->img.img = mlx_new_image(env->mlx, env->img.x, env->img.y);
 
-    // mlx_loop(env.mlx);
+    mlx_loop(env->mlx);
     return (0);
 }
