@@ -16,6 +16,7 @@
 | `libft` | ✅ **Terminé ** |
 | `ft_printf` | ✅ **Terminé ** |
 | `get_next_line` | ✅ **Terminé ** |
+| `so_long` | 🚧**En Travaux ** |
 | Autres projets du tronc commun | ❌ **À compléter** |
 
 ---
