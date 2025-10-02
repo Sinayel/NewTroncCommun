@@ -11,7 +11,7 @@
 
 ## 🧾 Statut global
 
-| Projet | Statut | Notes | Dernier commit |
+| Projet | Statut | Notes |
 |---|---:|---|---|
 | `libft` | ✅ **Terminé ** |
 | `ft_printf` | ✅ **Terminé ** |
