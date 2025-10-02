@@ -12,7 +12,7 @@
 ## 🧾 Statut global
 
 | Projet | Statut | Notes |
-|---|---:|---|---|
+|---|---:|---|
 | `libft` | ✅ **Terminé ** |
 | `ft_printf` | ✅ **Terminé ** |
 | `get_next_line` | ✅ **Terminé ** |
