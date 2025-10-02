@@ -16,7 +16,7 @@
 | `libft` | ✅ **Terminé** | Manque les bonus |
 | `ft_printf` | ✅ **Terminé** | A Verifier |
 | `get_next_line` | ✅ **Terminé** | Manque le bonus |
-| `so_long` | 🚧**En Travaux** | |
+| `so_long` | 🚧**En Travaux** | Manque seulement l'affichage |
 | Autres projets du tronc commun | ❌ *À compléter* | |
 
 ---
