@@ -6,13 +6,13 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 19:07:01 by ylouvel           #+#    #+#             */
-/*   Updated: 2025/09/30 14:45:20 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/04 01:16:58 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*strdup(const char *s1)
+char	*ft_strdup(const char *s1)
 {
 	int		i;
 	char	*str;

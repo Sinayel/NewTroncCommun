@@ -6,43 +6,35 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:31:27 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/04 00:48:29 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/04 01:22:04 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	init_map(t_env *env, char *url_map)
+int	init_map(t_env *env, int fd)
 {
-	int		fd;
 	char	*line;
 	int		len;
-	int		test;
 
-	fd = open(url_map, O_RDONLY);
-	if (fd == -1)
-		return (0);
-	test = 0;
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		if (*line == '\0')
 		{
 			free(line);
+			line = get_next_line(fd);
 			continue ;
 		}
-		env->img.map[env->img.x] = line;
+		env->img.map[env->img.x] = ft_strdup(line);
+		free(line);
 		if (env->img.x == 0)
 			len = ft_strlen_map(env->img.map[env->img.x]);
 		env->img.y = ft_strlen_map(env->img.map[env->img.x]);
 		if (len != env->img.y)
 			print_error(1);
 		env->img.x++;
-	}
-	if (test == 1)
-	{
-		free(line);
-		env->img.map[env->img.x] = NULL;
-		close(fd);
+		line = get_next_line(fd);
 	}
 	env->img.map[env->img.x] = NULL;
 	close(fd);
@@ -65,10 +57,13 @@ char	**copy_map(t_env *env)
 	int		i;
 	char	**copy;
 
-	i = -1;
+	i = 0;
 	copy = malloc(sizeof(char *) * (env->img.x + 1));
-	while (++i < env->img.x)
+	while (i < env->img.x)
+	{
 		copy[i] = strdup(env->img.map[i]);
+		i++;
+	}
 	copy[i] = NULL;
 	return (copy);
 }

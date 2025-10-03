@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:28:13 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/04 00:31:39 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/04 01:09:38 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	print_error(int i)
 {
 	if (i == 1)
 	{
-		printf("Error\nYou have to put the same len of each line for the map\n");
+		printf("Error\n");
+		printf("You have to put the same len of each line for the map\n");
 		return (0);
 	}
 	else if (i == 2)
@@ -64,11 +65,13 @@ int	count_lines(char *url_map)
 	if (fd == -1)
 		return (-1);
 	count = 0;
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		if (*line != '\n')
 			count++;
 		free(line);
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (count);

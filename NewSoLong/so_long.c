@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:01:30 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/04 00:48:09 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/04 01:19:13 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,16 @@ int	main(int argc, char *argv[])
 {
 	t_env	*env;
 	char	**cpy_map;
+	int fd;
 
 	env = get_data();
 	init_all(env, argv[1]);
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+		return (0);
 	if (argc == 2)
 	{
-		if (init_map(env, argv[1])) //* Init Map Fini
+		if (init_map(env, fd)) //* Init Map Fini
 		{
 			cpy_map = copy_map(env);
 			printf("init map : OK\n");
@@ -65,10 +69,10 @@ int	main(int argc, char *argv[])
 					printf("Check Path : OK\n\n");
 				else
 					print_error(3);
-				if (cpy_map)
-					free_map(cpy_map);
 				// printf("count c = %d | c = %d\n", env->img.count_c, found_c);
 			}
+			if (cpy_map)
+				free_map(cpy_map);
 		}
 		if (env->img.map)
 		{
