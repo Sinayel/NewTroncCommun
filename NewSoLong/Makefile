@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror -Iminilibx-linux -INewLibft -INewGetNextLi -g3
 RM = rm -f
 
 NAME = so_long
-SRCS = so_long.c
+SRCS = so_long.c map.c parsing.c utils.c
 OBJS = $(SRCS:.c=.o)
 
 MLX_DIR = minilibx-linux
