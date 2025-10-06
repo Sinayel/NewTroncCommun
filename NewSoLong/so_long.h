@@ -6,14 +6,15 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:30:51 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/04 01:11:42 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/06 21:16:32 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-//! Libft et include dans le gnl.h pour des raison de clonflit avec strlen et strjoin
+//! Libft et include dans le gnl.h
+//! pour des raison de clonflit avec strlen
 # include "NewGetNextLine/get_next_line.h"
 # include "minilibx-linux/mlx.h"
 
@@ -29,6 +30,8 @@ typedef struct s_data
 	int		found_p;
 	char	**map;
 	void	*img;
+	int		width;
+	int		height;
 	char	*addr;
 }			t_data;
 

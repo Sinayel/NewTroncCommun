@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 18:16:14 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/02 18:31:19 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/04 02:42:18 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,3 @@ char	*ft_strjoiin(char *s1, char *s2)
 	return (str);
 }
 
-char	*ft_strchr(const char *s, int c)
-{
-	char	*tmp;
-	int		i;
-
-	tmp = (char *)s;
-	i = 0;
-	if (!tmp)
-		return (0);
-	while (tmp[i])
-	{
-		if (tmp[i] == c)
-			return (&tmp[i]);
-		i++;
-	}
-	return (0);
-}

@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:01:30 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/04 01:19:13 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/06 21:19:27 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,34 @@ void	init_all(t_env *env, char *url_map)
 	env->img.found_c = 0;
 	env->img.found_p = 0;
 	env->img.x = 0;
+	env->img.width = 20;
+	env->img.height = 20;
+	env->mlx = mlx_init();
 }
+
+int close_win(int keycode, t_env *env)
+{
+	printf("keycode = %d\n", keycode);
+	if(keycode == 65307)
+	{
+		printf("Fermeture\n");
+		mlx_destroy_window(env->mlx, env->win);
+		exit(1);
+	}
+	return 0;
+}
+
+void display_image(t_env *env)
+{
+    env->img.img = mlx_xpm_file_to_image(env->mlx, "kitty.xpm", &env->img.width, &env->img.height);
+    if (!env->img.img)
+    {
+        printf("Erreur\nimpossible de charger l'image XPM\n");
+        return;
+    }
+    mlx_put_image_to_window(env->mlx, env->win, env->img.img, 0, 0);
+}
+
 
 int	main(int argc, char *argv[])
 {
@@ -80,11 +107,12 @@ int	main(int argc, char *argv[])
 			free_map(env->img.map);
 		}
 	}
-	// env->mlx = mlx_init();
-	// env->img.x = 1920;
-	// env->img.y = 1080;
-	// env->win = mlx_new_window(env->mlx, env->img.x, env->img.y, "So Long");
-	// env->img.img = mlx_new_image(env->mlx, env->img.x, env->img.y);
-	// mlx_loop(env->mlx);
+	printf("x = %d | y = %d\n", env->img.x, env->img.y);
+	env->img.x = 800;
+	env->img.y = 600;
+	env->win = mlx_new_window(env->mlx, env->img.x, env->img.y, "So Long");
+	display_image(env);
+	mlx_key_hook(env->win, close_win, env);
+	mlx_loop(env->mlx);
 	return (0);
 }
