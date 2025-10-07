@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:01:30 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/07 04:34:29 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/07 05:10:04 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	init_all(t_env *env, char *url_map)
 	env->img.width = 40;
 	env->img.height = 40;
 	env->img.mv_count = 0;
+	env->img.obj = 0;
 	env->mlx = mlx_init();	//! Je crois que sa peux leaks (a verifier)
 }
 
@@ -77,7 +78,16 @@ int	close_win(int keycode, t_env *env)
 	else if (keycode == 113)
 		new_y--;
 	else if (keycode == 100)
-		new_y++;	
+		new_y++;
+	if(env->img.map[new_x][new_y] == 'E' && env->img.obj == env->img.count_c)
+		exit(1);
+	if(env->img.map[new_x][new_y] == 'C' && env->img.obj < env->img.count_c)
+	{
+		env->img.obj++;
+		printf("obj = %d\n", env->img.obj);
+		env->img.map[new_x][new_y] = '0';
+		display_choice('0', env, new_x, new_y);
+	}
 	if (env->img.map[new_x][new_y] != '1')
 	{
 		env->img.mv_count++;

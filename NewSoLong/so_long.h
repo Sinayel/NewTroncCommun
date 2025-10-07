@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:30:51 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/07 04:11:51 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/07 04:43:31 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_data
 	int		width;
 	int		height;
 	int		mv_count;
+	int		obj;
 }			t_data;
 
 typedef struct s_env
