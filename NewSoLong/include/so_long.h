@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:30:51 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/07 05:25:17 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/07 15:01:01 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_data
 	int		found_c;
 	int		found_e;
 	int		found_p;
+	int		gnl_error;
 	char	**map;
 	void	*img;
 	int		width;

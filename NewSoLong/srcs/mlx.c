@@ -6,11 +6,11 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 05:12:27 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/07 13:13:45 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/07 14:27:49 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/so_long.h"
+#include "../include/so_long.h"
 
 int	handle_key(int keycode, t_env *env)
 {
@@ -99,6 +99,7 @@ void	display_image(t_env *env, char *xpm, int x, int y)
 		return ;
 	}
 	mlx_put_image_to_window(env->mlx, env->win, env->img.img, y, x);
+	mlx_destroy_image(env->mlx, env->img.img);
 }
 
 void	display_choice(char c, t_env *env, int x, int y)

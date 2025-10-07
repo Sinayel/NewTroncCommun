@@ -6,11 +6,11 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:01:30 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/07 13:14:21 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/07 15:08:00 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/so_long.h"
+#include "../include/so_long.h"
 
 //? (Au cas ou) sert a enlever les tabs et espace au debut de la map
 // char *clean_line(char *str)
@@ -37,9 +37,30 @@
 
 void	clean_exit(t_env *env)
 {
-	printf("%d\nExit\n", ++env->img.mv_count);
-	mlx_destroy_window(env->mlx, env->win);
-	exit(1);
+	if(env->img.mv_count != 0)
+		printf("%d\nExit\n", ++env->img.mv_count);
+	else
+		printf("%d\nExit\n", env->img.mv_count);
+	if(env->img.map)
+	{
+		free_map(env->img.map);
+		env->img.map = NULL;
+	}
+	if(env->win)
+	{
+		mlx_destroy_window(env->mlx, env->win);
+		mlx_destroy_display(env->mlx);
+		free(env->mlx);
+		env->win = NULL;
+		env->mlx = NULL;
+	}
+	if(env->mlx)
+	{
+		mlx_destroy_display(env->mlx);
+		free(env->mlx);
+		env->mlx = NULL;
+	}
+	exit(EXIT_SUCCESS);
 }
 
 void	init_all(t_env *env, char *url_map)
@@ -87,12 +108,19 @@ int	main(int argc, char *argv[])
 					&& env->img.found_e == 1 && env->img.found_p == 1)
 					printf("Check Path : OK\n\n");
 				else
+				{
 					print_error(3);
+					if (cpy_map)
+						free_map(cpy_map);
+					clean_exit(env);
+				}
 				// printf("count c = %d | c = %d\n", env->img.count_c, found_c);
 			}
 			if (cpy_map)
 				free_map(cpy_map);
 		}
+		if(env->img.gnl_error == 1)
+			clean_exit(env);
 		//* Clear la map pour gerer les leaks (Faudra le gerer plutard)
 		// if (env->img.map)
 		// {

@@ -6,11 +6,11 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:28:13 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/07 05:23:56 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/07 15:09:47 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/so_long.h"
+#include "../include/so_long.h"
 
 t_env	*get_data(void)
 {
@@ -21,14 +21,18 @@ t_env	*get_data(void)
 
 int	print_error(int i)
 {
+	t_env *env;
+	env = get_data();
 	if (i == 1)
 	{
+		env->img.gnl_error = 1;
 		printf("Error\n");
 		printf("You have to put the same len of each line for the map\n");
 		return (0);
 	}
 	else if (i == 2)
 	{
+		env->img.gnl_error = 1;
 		printf("Error\nWrong map maybe try to lock the map\n");
 		return (0);
 	}
