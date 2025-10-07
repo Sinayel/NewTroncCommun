@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 05:12:27 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/07 05:24:00 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/07 13:13:45 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	check_wall(t_env *env, int new_x, int new_y)
 	display_choice('1', env, 0, 0);
 	if (mv_str)
 	{
-		mlx_string_put(env->mlx, env->win, 0, 10, 252, mv_str);
+		mlx_string_put(env->mlx, env->win, 0, 10, 0xFF0000, mv_str);
 		free(mv_str);
 	}
 	display_choice(env->img.map[env->img.spawn_x][env->img.spawn_y], env,
@@ -84,7 +84,7 @@ int	render_map(void)
 	}
 	display_image(env, "sprites/kitty.xpm", env->img.spawn_x * 40,
 		env->img.spawn_y * 40);
-	mlx_string_put(env->mlx, env->win, 0, 10, 252, mv_str);
+	mlx_string_put(env->mlx, env->win, 0, 10, 0xFF0000, mv_str);
 	free(mv_str); //! A tout moment il leaks
 	return (0);
 }
