@@ -1,16 +1,23 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Iminilibx-linux -INewLibft -INewGetNextLi -g3
-RM = rm -f
+RM = rm -rf
 
 NAME = so_long
 SRCS = so_long.c map.c parsing.c utils.c
-OBJS = $(SRCS:.c=.o)
+OBJ_DIR = obj
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
 MLX_DIR = minilibx-linux
 LIBFT_DIR = NewLibft
 GNL_DIR = NewGetNextLine
 
 all: $(NAME)
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
 	@# Compiler libft
@@ -22,11 +29,8 @@ $(NAME): $(OBJS)
 	@# Link final
 	$(CC) $(OBJS) -L$(GNL_DIR) -lgnl -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz -o $(NAME)
 
-.c.o:
-	$(CC) $(CFLAGS) -c $< -o $@
-
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJ_DIR)
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(MAKE) -C $(GNL_DIR) clean
 	$(MAKE) -C $(MLX_DIR) clean

@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:30:51 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/06 21:16:32 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/07 03:30:53 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_data
 	void	*img;
 	int		width;
 	int		height;
-	char	*addr;
+	int		mv_count;
 }			t_data;
 
 typedef struct s_env
@@ -58,5 +58,9 @@ void		print_map(void);
 //? Parsing
 int			parsing(t_env *env);
 void		check_path(char **map, int x, int y);
+
+//Todo Mlx
+void	display_image(t_env *env, char *xpm, int x, int y);
+void	display_choice(char c, t_env *env, int x, int y);
 
 #endif
