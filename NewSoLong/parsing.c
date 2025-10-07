@@ -6,11 +6,11 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:29:29 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/04 01:59:13 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/07 05:23:47 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "include/so_long.h"
 
 int	parsing(t_env *env)
 {

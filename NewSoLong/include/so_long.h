@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:30:51 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/07 04:43:31 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/07 05:25:17 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 //! Libft et include dans le gnl.h
 //! pour des raison de clonflit avec strlen
-# include "NewGetNextLine/get_next_line.h"
-# include "minilibx-linux/mlx.h"
+# include "../NewGetNextLine/get_next_line.h"
+# include "../minilibx-linux/mlx.h"
 
 typedef struct s_data
 {
@@ -49,6 +49,7 @@ int			count_lines(char *url_map);
 int			ft_strlen_map(char *str);
 int			print_error(int i);
 void		free_map(char **map);
+void		clean_exit(t_env *env);
 
 //! Map
 int			init_map(t_env *env, int fd);
@@ -61,8 +62,11 @@ int			render_map(void);
 int			parsing(t_env *env);
 void		check_path(char **map, int x, int y);
 
-//Todo Mlx
-void	display_image(t_env *env, char *xpm, int x, int y);
-void	display_choice(char c, t_env *env, int x, int y);
+// Todo Mlx
+void		display_image(t_env *env, char *xpm, int x, int y);
+void		display_choice(char c, t_env *env, int x, int y);
+int			render_map(void);
+void 		check_wall(t_env *env, int new_x, int new_y);
+int			handle_key(int keycode, t_env *env);
 
 #endif

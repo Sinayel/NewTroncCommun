@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror -Iminilibx-linux -INewLibft -INewGetNextLi -g3
 RM = rm -rf
 
 NAME = so_long
-SRCS = so_long.c map.c parsing.c utils.c
+SRCS = so_long.c map.c parsing.c utils.c mlx.c
 OBJ_DIR = obj
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 

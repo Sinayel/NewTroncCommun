@@ -6,11 +6,11 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:31:27 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/04 01:22:04 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/07 05:23:53 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "include/so_long.h"
 
 int	init_map(t_env *env, int fd)
 {
