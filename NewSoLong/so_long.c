@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:01:30 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/07 03:36:13 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/07 04:34:29 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 void	init_all(t_env *env, char *url_map)
 {
-	env->img.map = malloc(sizeof(char *) * (count_lines(url_map) + 1));
+	env->img.map = malloc(sizeof(char *) * (count_lines(url_map) + 1));	//! A free sinon Leaks
 	env->img.count_c = 0;
 	env->img.found_c = 0;
 	env->img.found_p = 0;
@@ -45,7 +45,7 @@ void	init_all(t_env *env, char *url_map)
 	env->img.width = 40;
 	env->img.height = 40;
 	env->img.mv_count = 0;
-	env->mlx = mlx_init();
+	env->mlx = mlx_init();	//! Je crois que sa peux leaks (a verifier)
 }
 
 // int display_player(void *param)
@@ -60,13 +60,13 @@ int	close_win(int keycode, t_env *env)
 {
 	int	new_x;
 	int	new_y;
+	char *mv_str = NULL;
 
 	new_x = env->img.spawn_x;
 	new_y = env->img.spawn_y;
-	printf("keycode = %d\n", keycode);
-	if (keycode == 65307)
+	if (keycode == 65307)	//! Sa leaks de malade !!!
 	{
-		printf("Fermeture\n");
+		printf("Exit\n");
 		mlx_destroy_window(env->mlx, env->win);
 		exit(1);
 	}
@@ -77,11 +77,18 @@ int	close_win(int keycode, t_env *env)
 	else if (keycode == 113)
 		new_y--;
 	else if (keycode == 100)
-		new_y++;
+		new_y++;	
 	if (env->img.map[new_x][new_y] != '1')
 	{
 		env->img.mv_count++;
 		printf("%d\n", env->img.mv_count); // Compte total des mouvements
+		mv_str = ft_itoa(env->img.mv_count);	//! Sa peux Leak
+		display_choice('1', env, 0, 0);
+		if(mv_str)
+		{
+			mlx_string_put(env->mlx, env->win, 0, 10, 252, mv_str);
+			free(mv_str);
+		}
 		display_choice(env->img.map[env->img.spawn_x][env->img.spawn_y], env,
 			env->img.spawn_x, env->img.spawn_y);
 		env->img.spawn_x = new_x;
@@ -121,11 +128,13 @@ void	display_choice(char c, t_env *env, int x, int y)
 int	render_map(void)
 {
 	t_env	*env;
+	char *mv_str;
 	int		x;
 	int		y;
 
 	env = get_data();
 	x = 0;
+	mv_str = ft_itoa(env->img.mv_count);	//! Sa peux leak
 	while (x < env->img.x)
 	{
 		y = 0;
@@ -137,9 +146,12 @@ int	render_map(void)
 		x++;
 	}
 	display_image(env, "sprites/kitty.xpm", env->img.spawn_x * 40, env->img.spawn_y * 40);
+	mlx_string_put(env->mlx, env->win, 0, 10, 252, mv_str);
+	free(mv_str);	//! A tout moment il leaks
 	return (0);
 }
 
+//! Pas d'exit qui free donc y'a vla les leaks
 int	main(int argc, char *argv[])
 {
 	t_env	*env;
@@ -155,14 +167,16 @@ int	main(int argc, char *argv[])
 		return (0);
 	if (argc == 2)
 	{
+		//! Leaks a gerer en cas d'erreur
 		if (init_map(env, fd)) //* Init Map Fini
 		{
 			cpy_map = copy_map(env);
 			printf("init map : OK\n");
+			//! Peux leaks
 			if (parsing(env)) //* Parsing Fini
 			{
 				printf("Parsing : OK\n");
-				check_path(cpy_map, env->img.spawn_x, env->img.spawn_y);
+				check_path(cpy_map, env->img.spawn_x, env->img.spawn_y); //! Impossible de leaks
 				//* Parsing des obj Fini
 				if (env->img.found_c == env->img.count_c
 					&& env->img.found_e == 1 && env->img.found_p == 1)
@@ -174,7 +188,7 @@ int	main(int argc, char *argv[])
 			if (cpy_map)
 				free_map(cpy_map);
 		}
-		//* Clear la map pour gerer les leaks
+		//* Clear la map pour gerer les leaks (Faudra le gerer plutard)
 		// if (env->img.map)
 		// {
 		print_map();
