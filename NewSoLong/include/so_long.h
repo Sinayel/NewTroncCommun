@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:30:51 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/07 15:01:01 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/08 16:27:17 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void		check_path(char **map, int x, int y);
 void		display_image(t_env *env, char *xpm, int x, int y);
 void		display_choice(char c, t_env *env, int x, int y);
 int			render_map(void);
-void 		check_wall(t_env *env, int new_x, int new_y);
+void 		check_wall(t_env *env, int new_x, int new_y, int keycode);
 int			handle_key(int keycode, t_env *env);
 
 #endif

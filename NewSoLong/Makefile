@@ -21,29 +21,29 @@ mlx:
 	git clone https://github.com/42Paris/minilibx-linux.git minilibx-linux
 
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 
 $(NAME): $(OBJS)
-	$(MAKE) -C $(MLX_DIR)
-	$(MAKE) -C $(LIBFT_DIR)
-	$(MAKE) -C $(GNL_DIR)
-	$(CC) $(CFLAGS) $(OBJS) -L$(GNL_DIR) -lgnl -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz -o $(NAME)
+	@$(MAKE) -C $(MLX_DIR)
+	@$(MAKE) -C $(LIBFT_DIR)
+	@$(MAKE) -C $(GNL_DIR)
+	@cc $(CFLAGS) $(OBJS) -L$(GNL_DIR) -lgnl -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER) | $(OBJ_DIR)
-	cc $(CFLAGS) -c $< -o $@
+	@cc $(CFLAGS) -c $< -o $@
 
 clean:
 	@echo "Cleaning objects..."
-	$(RM) $(OBJ_DIR)
-	$(MAKE) -C $(MLX_DIR) clean
-	$(MAKE) -C $(LIBFT_DIR) clean
-	$(MAKE) -C $(GNL_DIR) clean
+	@$(RM) $(OBJ_DIR)
+	@$(MAKE) -C $(MLX_DIR) clean
+	@$(MAKE) -C $(LIBFT_DIR) clean
+	@$(MAKE) -C $(GNL_DIR) clean
 
 fclean: clean
-	$(RM) $(NAME)
-	$(MAKE) -C $(LIBFT_DIR) fclean
-	$(MAKE) -C $(GNL_DIR) fclean
-	$(RM) vgcore.*
+	@$(RM) $(NAME)
+	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@$(MAKE) -C $(GNL_DIR) fclean
+	@$(RM) vgcore.*
 
 re: fclean all
 

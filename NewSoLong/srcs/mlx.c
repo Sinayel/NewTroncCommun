@@ -6,11 +6,23 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 05:12:27 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/08 16:10:27 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/08 16:31:24 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
+
+void	handle_keycode(int keycode, int *new_x, int *new_y)
+{
+	if (keycode == 122 || keycode == 65362)
+		(*new_x)--;
+	else if (keycode == 115 || keycode == 65364)
+		(*new_x)++;
+	else if (keycode == 113 || keycode == 65361)
+		(*new_y)--;
+	else if (keycode == 100 || keycode == 65363)
+		(*new_y)++;
+}
 
 int	handle_key(int keycode, t_env *env)
 {
@@ -19,14 +31,11 @@ int	handle_key(int keycode, t_env *env)
 
 	new_x = env->img.spawn_x;
 	new_y = env->img.spawn_y;
-	if (keycode == 122)
-		new_x--;
-	else if (keycode == 115)
-		new_x++;
-	else if (keycode == 113)
-		new_y--;
-	else if (keycode == 100)
-		new_y++;
+	printf("keycode = %d\n", keycode);
+	if (keycode == 122 || keycode == 115 || keycode == 113 || keycode == 100
+		|| keycode == 65363 || keycode == 65364 || keycode == 65362
+		|| keycode == 65361)
+		handle_keycode(keycode, &new_x, &new_y);
 	if (keycode == 65307 || (env->img.map[new_x][new_y] == 'E'
 			&& env->img.obj == env->img.count_c)) //! Sa leaks de malade !!!
 		clean_exit(env);
@@ -37,16 +46,21 @@ int	handle_key(int keycode, t_env *env)
 		display_choice('0', env, new_x, new_y);
 	}
 	if (env->img.map[new_x][new_y] != '1')
-		check_wall(env, new_x, new_y);
+		check_wall(env, new_x, new_y, keycode);
 	return (0);
 }
 
-void	check_wall(t_env *env, int new_x, int new_y)
+void	check_wall(t_env *env, int new_x, int new_y, int keycode)
 {
 	char	*mv_str;
-	
-	env->img.mv_count++;
-	printf("%d\n", env->img.mv_count);   // Compte total des mouvements
+
+	if (keycode == 122 || keycode == 115 || keycode == 113 || keycode == 100
+		|| keycode == 65363 || keycode == 65364 || keycode == 65362
+		|| keycode == 65361)
+	{
+		env->img.mv_count++;
+		printf("%d\n", env->img.mv_count); // Compte total des mouvements
+	}
 	mv_str = ft_itoa(env->img.mv_count); //! Sa peux Leak
 	display_choice('1', env, 0, 0);
 	if (mv_str)

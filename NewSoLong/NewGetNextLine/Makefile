@@ -1,5 +1,5 @@
-CC = cc
 CFLAGS = -Wall -Wextra -Werror
+
 RM = rm -rf
 
 NAME = libgnl.a
@@ -12,19 +12,19 @@ OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
 
 $(OBJ_DIR)/%.o: %.c $(HEADER) | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@cc $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 
 clean:
-	$(RM) $(OBJ_DIR)
+	@$(RM) $(OBJ_DIR)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 

@@ -22,22 +22,22 @@ BOBJS = $(patsubst %.c,$(OBJ_DIR)/%.o,$(BONUS))
 all: $(NAME)
 
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o: %.c $(HEADER) | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
 
 bonus: $(BOBJS)
-	ar rcs $(NAME) $(OBJS) $(BOBJS)
+	@ar rcs $(NAME) $(OBJS) $(BOBJS)
 
 clean:
-	$(RM) $(OBJ_DIR)
+	@$(RM) $(OBJ_DIR)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 
