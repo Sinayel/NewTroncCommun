@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 05:12:27 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/07 14:27:49 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/08 16:10:27 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	handle_key(int keycode, t_env *env)
 void	check_wall(t_env *env, int new_x, int new_y)
 {
 	char	*mv_str;
-
+	
 	env->img.mv_count++;
 	printf("%d\n", env->img.mv_count);   // Compte total des mouvements
 	mv_str = ft_itoa(env->img.mv_count); //! Sa peux Leak

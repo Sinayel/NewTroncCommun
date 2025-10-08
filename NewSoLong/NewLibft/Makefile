@@ -1,81 +1,44 @@
-CC = 			cc
-CFLAGS = 		-Wall -Wextra -Werror
-RM = 			rm -f
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+RM = rm -rf
 
 NAME = libft.a
+HEADER = libft.h
+OBJ_DIR = obj
 
-SRCS = 			ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
-				ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c \
-				ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c \
-				ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c\
-				ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_itoa.c \
-# 				ft_strjoin.c ft_strtrim.c ft_split.c ft_strmapi.c \
-# 				ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c\
+SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
+	ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c \
+	ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c \
+	ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c \
+	ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_itoa.c
 
-OBJS = 		$(SRCS:.c=.o)
+OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS))
 
-# BONUS = 		ft_lstnew.c \
-# 				ft_lstadd_front.c \
-# 				ft_lstsize.c \
-# 				ft_lstlast.c \
-# 				ft_lstadd_back.c \
-# 				ft_lstdelone.c \
-# 				ft_lstclear.c \
-# 				ft_lstiter.c \
-# 				ft_lstmap.c \
+BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
+	ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
-BOBJS = 	$(BONUS:.c=.o)
+BOBJS = $(patsubst %.c,$(OBJ_DIR)/%.o,$(BONUS))
 
-$(NAME) :	$(OBJS)
-				ar -rc $(NAME) $(OBJS)
+all: $(NAME)
 
-all : $(NAME) banner
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
-banner:
-	@echo "\033[1;32m✅ Libft successfully built!\033[0m"
-	@echo ""
-	@echo "\033[1;36m ██▓     ██▓ ▄▄▄▄     █████▒▄▄▄█████▓\033[0m"
-	@echo "\033[1;36m▓██▒    ▓██▒▓█████▄ ▓██   ▒ ▓  ██▒ ▓▒\033[0m"
-	@echo "\033[1;36m▒██░    ▒██▒▒██▒ ▄██▒████ ░ ▒ ▓██░ ▒░\033[0m"
-	@echo "\033[1;36m▒██░    ░██░▒██░█▀  ░▓█▒  ░ ░ ▓██▓ ░ \033[0m"
-	@echo "\033[1;36m░██████▒░██░░▓█  ▀█▓░▒█░      ▒██▒ ░ \033[0m"
-	@echo "\033[1;36m░ ▒░▓  ░░▓  ░▒▓███▀▒ ▒ ░      ▒ ░░   \033[0m"
-	@echo "\033[1;36m░ ░ ▒  ░ ▒ ░▒░▒   ░  ░          ░    \033[0m"
-	@echo "\033[1;36m  ░ ░    ▒ ░ ░    ░  ░ ░      ░      \033[0m"
-	@echo "\033[1;36m    ░  ░ ░   ░                       \033[0m"
-	@echo "\033[1;36m                  ░                \033[0m"
-	@echo ""
+$(OBJ_DIR)/%.o: %.c $(HEADER) | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
+$(NAME): $(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
-
-so:
-				$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRCS)
-				gcc -nostartfiles -shared -o libft.so $(OBJS) $(BOBJS)
-
-.c.o:
-				${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
-
-
-$(MSOURCES) :
-				$(CC) $(CFLAGS) $(SRCS) -c
-				ar -rc $(NAME) $(OBJS)
-
-$(BSOURCES) :
-				$(CC) $(CFLAGS) $(SRCS) -c
-				ar -rc $(NAME) $(OBJS)
-
-re : 		fclean all
-
-bonus: 		$(BOBJS)
-				ar -rc $(NAME) $(BOBJS)
+bonus: $(BOBJS)
+	ar rcs $(NAME) $(OBJS) $(BOBJS)
 
 clean:
-				$(RM) $(OBJS) $(BOBJS)
-				@echo "\033[0;31mLibft cleaned!\033[0m"
+	$(RM) $(OBJ_DIR)
 
+fclean: clean
+	$(RM) $(NAME)
 
-fclean: 	clean
-				$(RM) $(NAME)
-				$(RM) libft.so
+re: fclean all
 
-.PHONY: 	fclean clean re all bonus
+.PHONY: all clean fclean re bonus

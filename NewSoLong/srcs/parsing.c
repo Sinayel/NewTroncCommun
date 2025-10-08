@@ -6,11 +6,18 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:29:29 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/07 14:27:45 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/08 14:47:50 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
+
+int	check_elem(char map)
+{
+	if (map == '1' || map == '0' || map == 'E' || map == 'P' || map == 'C')
+		return (1);
+	return (0);
+}
 
 int	parsing(t_env *env)
 {
@@ -26,9 +33,9 @@ int	parsing(t_env *env)
 		y = 0;
 		while (env->img.map[x][y])
 		{
-			if (env->img.map[x][y] != '1' && (x == 0 || x == (env->img.x - 1)
-					|| env->img.map[x][0] != '1' || env->img.map[x][env->img.y
-					- 1] != '1'))
+			if (((x == 0 || x == env->img.x - 1 || y == 0 || y == env->img.y
+						- 1) && env->img.map[x][y] != '1')
+				|| !check_elem(env->img.map[x][y]))
 				return (print_error(2));
 			if (env->img.map[x][y] == 'P' || env->img.map[x][y] == 'E'
 				|| env->img.map[x][y] == 'C')
