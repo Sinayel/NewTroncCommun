@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 05:12:27 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/08 16:34:32 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/08 17:03:55 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int	render_map(void)
 
 	env = get_data();
 	x = 0;
-	mv_str = ft_itoa(env->img.mv_count); //! Sa peux leak
 	while (x < env->img.x)
 	{
 		y = 0;
@@ -95,6 +94,7 @@ int	render_map(void)
 		}
 		x++;
 	}
+	mv_str = ft_itoa(env->img.mv_count); //! Sa peux leak
 	display_image(env, "sprites/kitty.xpm", env->img.spawn_x * 40,
 		env->img.spawn_y * 40);
 	mlx_string_put(env->mlx, env->win, 0, 10, 0xFF0000, mv_str);
@@ -109,6 +109,7 @@ void	display_image(t_env *env, char *xpm, int x, int y)
 	if (!env->img.img)
 	{
 		printf("Erreur\nimpossible de charger l'image XPM\n");
+		clean_exit(env);
 		return ;
 	}
 	mlx_put_image_to_window(env->mlx, env->win, env->img.img, y, x);

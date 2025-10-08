@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylouvel <ylouvel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 18:37:56 by ylouvel           #+#    #+#             */
-/*   Updated: 2025/09/21 19:03:31 by ylouvel          ###   ########.fr       */
+/*   Updated: 2025/10/08 17:35:25 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	strncmp(const char *s1, const char *s2, unsigned long n)
+int	ft_strncmp(const char *s1, const char *s2, unsigned long n)
 {
 	unsigned int	i;
 
@@ -19,6 +19,7 @@ int	strncmp(const char *s1, const char *s2, unsigned long n)
 	{
 		if (s1[i] != s2[i])
 			return (s1[i] - s2[i]);
+		i++;
 	}
 	return (0);
 }
