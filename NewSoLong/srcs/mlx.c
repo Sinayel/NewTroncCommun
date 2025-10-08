@@ -6,74 +6,11 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 05:12:27 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/08 17:03:55 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/08 23:31:59 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-
-void	handle_keycode(int keycode, int *new_x, int *new_y)
-{
-	if (keycode == 122 || keycode == 65362)
-		(*new_x)--;
-	else if (keycode == 115 || keycode == 65364)
-		(*new_x)++;
-	else if (keycode == 113 || keycode == 65361)
-		(*new_y)--;
-	else if (keycode == 100 || keycode == 65363)
-		(*new_y)++;
-}
-
-int	handle_key(int keycode, t_env *env)
-{
-	int	new_x;
-	int	new_y;
-
-	new_x = env->img.spawn_x;
-	new_y = env->img.spawn_y;
-	if (keycode == 122 || keycode == 115 || keycode == 113 || keycode == 100
-		|| keycode == 65363 || keycode == 65364 || keycode == 65362
-		|| keycode == 65361)
-		handle_keycode(keycode, &new_x, &new_y);
-	if (keycode == 65307 || (env->img.map[new_x][new_y] == 'E'
-			&& env->img.obj == env->img.count_c)) //! Sa leaks de malade !!!
-		clean_exit(env);
-	if (env->img.map[new_x][new_y] == 'C' && env->img.obj < env->img.count_c)
-	{
-		env->img.obj++;
-		env->img.map[new_x][new_y] = '0';
-		display_choice('0', env, new_x, new_y);
-	}
-	if (env->img.map[new_x][new_y] != '1')
-		check_wall(env, new_x, new_y, keycode);
-	return (0);
-}
-
-void	check_wall(t_env *env, int new_x, int new_y, int keycode)
-{
-	char	*mv_str;
-
-	if (keycode == 122 || keycode == 115 || keycode == 113 || keycode == 100
-		|| keycode == 65363 || keycode == 65364 || keycode == 65362
-		|| keycode == 65361)
-	{
-		env->img.mv_count++;
-		printf("%d\n", env->img.mv_count); // Compte total des mouvements
-	}
-	mv_str = ft_itoa(env->img.mv_count); //! Sa peux Leak
-	display_choice('1', env, 0, 0);
-	if (mv_str)
-	{
-		mlx_string_put(env->mlx, env->win, 0, 10, 0xFF0000, mv_str);
-		free(mv_str);
-	}
-	display_choice(env->img.map[env->img.spawn_x][env->img.spawn_y], env,
-		env->img.spawn_x, env->img.spawn_y);
-	env->img.spawn_x = new_x;
-	env->img.spawn_y = new_y;
-	display_image(env, "sprites/kitty.xpm", env->img.spawn_x * 40,
-		env->img.spawn_y * 40);
-}
 
 int	render_map(void)
 {
@@ -94,11 +31,11 @@ int	render_map(void)
 		}
 		x++;
 	}
-	mv_str = ft_itoa(env->img.mv_count); //! Sa peux leak
+	mv_str = ft_itoa(env->img.mv_count);
 	display_image(env, "sprites/kitty.xpm", env->img.spawn_x * 40,
 		env->img.spawn_y * 40);
 	mlx_string_put(env->mlx, env->win, 0, 10, 0xFF0000, mv_str);
-	free(mv_str); //! A tout moment il leaks
+	free(mv_str);
 	return (0);
 }
 
@@ -108,7 +45,7 @@ void	display_image(t_env *env, char *xpm, int x, int y)
 			&env->img.height);
 	if (!env->img.img)
 	{
-		printf("Erreur\nimpossible de charger l'image XPM\n");
+		putstr_fd("Erreur\nimpossible de charger l'image XPM\n", 2);
 		clean_exit(env);
 		return ;
 	}
@@ -128,4 +65,38 @@ void	display_choice(char c, t_env *env, int x, int y)
 		display_image(env, "sprites/strawberry.xpm", x * 40, y * 40);
 	else if (c == 'P')
 		display_image(env, "sprites/fond.xpm", x * 40, y * 40);
+}
+
+void write_exit_mv(t_env *env)
+{
+	if(env->img.mv_count != 0)
+		ft_putnbr_fd(env->img.mv_count, 1);
+	else
+		ft_putnbr_fd(++env->img.mv_count, 1);
+	putstr_fd("\nExit\n", 1);
+}
+
+void	clean_exit(t_env *env)
+{
+	write_exit_mv(env);
+	if(env->img.map)
+	{
+		free_map(env->img.map);
+		env->img.map = NULL;
+	}
+	if(env->win)
+	{
+		mlx_destroy_window(env->mlx, env->win);
+		mlx_destroy_display(env->mlx);
+		free(env->mlx);
+		env->win = NULL;
+		env->mlx = NULL;
+	}
+	if(env->mlx)
+	{
+		mlx_destroy_display(env->mlx);
+		free(env->mlx);
+		env->mlx = NULL;
+	}
+	exit(EXIT_SUCCESS);
 }

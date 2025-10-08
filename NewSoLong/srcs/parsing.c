@@ -6,17 +6,16 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:29:29 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/08 14:47:50 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/08 23:17:31 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-int	check_elem(char map)
+int fail()
 {
-	if (map == '1' || map == '0' || map == 'E' || map == 'P' || map == 'C')
-		return (1);
-	return (0);
+	print_error(2);
+	return 0;
 }
 
 int	parsing(t_env *env)
@@ -36,7 +35,7 @@ int	parsing(t_env *env)
 			if (((x == 0 || x == env->img.x - 1 || y == 0 || y == env->img.y
 						- 1) && env->img.map[x][y] != '1')
 				|| !check_elem(env->img.map[x][y]))
-				return (print_error(2));
+				return (fail());
 			if (env->img.map[x][y] == 'P' || env->img.map[x][y] == 'E'
 				|| env->img.map[x][y] == 'C')
 				define_spawn(x, y, env->img.map, &count);

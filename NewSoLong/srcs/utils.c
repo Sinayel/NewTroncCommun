@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:28:13 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/08 17:15:40 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/08 23:40:36 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,16 @@ t_env	*get_data(void)
 	return (&data);
 }
 
-int	print_error(int i)
+void	putstr_fd(char *str, int fd)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		write(fd, &str[i], 1);
+}
+
+void	print_error(int i)
 {
 	t_env	*env;
 
@@ -27,27 +36,18 @@ int	print_error(int i)
 	if (i == 1)
 	{
 		env->img.gnl_error = 1;
-		printf("Error\n");
-		printf("You have to put the same len of each line for the map\n");
-		return (0);
+		putstr_fd("Error\n", 2);
+		putstr_fd("You have to put the same len of each line for the map\n", 2);
 	}
 	else if (i == 2)
 	{
 		env->img.gnl_error = 1;
-		printf("Error\nWrong map maybe try to lock the map\n");
-		return (0);
+		putstr_fd("Error\nWrong map maybe try to lock the map\n", 2);
 	}
 	else if (i == 3)
-	{
-		printf("Error\nAll the object as to be foundable\n");
-		return (0);
-	}
+		putstr_fd("Error\nAll the object as to be foundable\n", 2);
 	else if (i == 4)
-	{
-		printf("Error too many P or E\n");
-		return (0);
-	}
-	return (0);
+		putstr_fd("Error\ntoo many P or E\n", 2);
 }
 
 int	ft_strlen_map(char *str)

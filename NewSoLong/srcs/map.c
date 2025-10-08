@@ -6,11 +6,19 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:31:27 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/07 14:57:30 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/08 23:41:21 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
+
+void len_error(t_env *env, int fd)
+{
+	if(env->img.i == 1)
+		print_error(1);
+	env->img.map[env->img.x] = NULL;
+	close(fd);
+}
 
 int	init_map(t_env *env, int fd)
 {
@@ -32,12 +40,11 @@ int	init_map(t_env *env, int fd)
 			len = ft_strlen_map(env->img.map[env->img.x]);
 		env->img.y = ft_strlen_map(env->img.map[env->img.x]);
 		if (len != env->img.y)
-			print_error(1);
+			env->img.i = 1;
 		env->img.x++;
 		line = get_next_line(fd);
 	}
-	env->img.map[env->img.x] = NULL;
-	close(fd);
+	len_error(env, fd);
 	return (1);
 }
 
@@ -49,7 +56,8 @@ void	print_map(void)
 	env = get_data();
 	x = -1;
 	while (env->img.map[++x])
-		printf("%s\n", env->img.map[x]);
+		putstr_fd(env->img.map[x], 1);
+	putstr_fd("\n", 1);
 }
 
 char	**copy_map(t_env *env)

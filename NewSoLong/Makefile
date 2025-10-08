@@ -10,7 +10,7 @@ MLX_DIR = minilibx-linux
 HEADER = include/so_long.h
 
 NAME = so_long
-SRCS = map.c mlx.c parsing.c so_long.c utils.c
+SRCS = map.c mlx.c parsing.c so_long.c utils.c handle.c checking.c
 
 SRCS_FILES = $(addprefix $(SRC_DIR)/, $(SRCS))
 OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS))
