@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:01:30 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/07 15:08:00 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/08 16:47:47 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,21 @@ void	init_all(t_env *env, char *url_map)
 	env->mlx = mlx_init(); //! Je crois que sa peux leaks (a verifier)
 }
 
+int handle_key_press(int keycode, t_env *env)
+{
+	if (keycode == 119)
+		env->img.key_w = 1;
+	if (keycode == 97)
+		env->img.key_a = 1;
+	if (keycode == 115)
+		env->img.key_s = 1;
+	if (keycode == 100)
+		env->img.key_d = 1;
+	if (keycode == 65307)
+		clean_exit(env);
+	return 0;
+}
+
 //! Pas d'exit qui free donc y'a vla les leaks
 int	main(int argc, char *argv[])
 {
@@ -122,15 +137,13 @@ int	main(int argc, char *argv[])
 		if(env->img.gnl_error == 1)
 			clean_exit(env);
 		//* Clear la map pour gerer les leaks (Faudra le gerer plutard)
-		// if (env->img.map)
-		// {
 		print_map();
-		// 	free_map(env->img.map);
-		// }
 	}
 	env->win = mlx_new_window(env->mlx, 800, 600, "So Long");
 	render_map();
 	mlx_key_hook(env->win, handle_key, env);
+	mlx_hook(env->win, 2, 1L<<0, handle_key_press, env);
+	mlx_do_key_autorepeaton(env->mlx);
 	mlx_loop(env->mlx);
 	return (0);
 }
