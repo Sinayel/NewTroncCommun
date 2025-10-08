@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:01:30 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/08 23:23:08 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/08 23:56:27 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	main(int argc, char *argv[])
 	if (argc == 2)
 	{
 		t_env	*env;
-		char	**cpy_map;
 		int		fd;
 
 		env = get_data();
@@ -77,11 +76,10 @@ int	main(int argc, char *argv[])
 		check_ber(argv[1], env);
 		if (init_map(env, fd))
 		{
-			cpy_map = copy_map(env);
 			if (parsing(env))
-				check_parsing(env, cpy_map);
-			if (cpy_map)
-				free_map(cpy_map);
+				check_parsing(env);
+			else
+				clean_exit(env);
 		}
 		if(env->img.gnl_error == 1)
 			clean_exit(env);

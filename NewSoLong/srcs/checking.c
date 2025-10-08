@@ -6,16 +6,20 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 22:55:11 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/08 23:39:33 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 00:03:54 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-int	check_elem(char map)
+int	check_elem(char map, t_env *env)
 {
 	if (map == '1' || map == '0' || map == 'E' || map == 'P' || map == 'C')
+	{
+		env->img.i = 1;
 		return (1);
+	}
+	env->img.i = 0;
 	return (0);
 }
 
@@ -45,15 +49,25 @@ void	check_wall(t_env *env, int new_x, int new_y, int keycode)
 		env->img.spawn_y * 40);
 }
 
-void check_parsing(t_env *env, char **cpy_map)
+void check_parsing(t_env *env)
 {
+	char **cpy_map;
+
+	cpy_map = copy_map(env);
 	check_path(cpy_map, env->img.spawn_x, env->img.spawn_y);
 	if (env->img.found_c == env->img.count_c
 		&& env->img.found_e == 1 && env->img.found_p == 1)
+	{
+		if (cpy_map)
+			free_map(cpy_map);
 		return ;
+	}
 	else
 	{
-		print_error(3);
+		if(env->img.found_e > 1 || env->img.found_p > 1)
+			print_error(4);
+		else
+			print_error(3);
 		if (cpy_map)
 			free_map(cpy_map);
 		clean_exit(env);

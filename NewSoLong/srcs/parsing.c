@@ -6,15 +6,18 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:29:29 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/08 23:17:31 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/08 23:57:34 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-int fail()
+int fail(int i)
 {
-	print_error(2);
+	if(i == 0)
+		print_error(5);
+	else
+		print_error(2);
 	return 0;
 }
 
@@ -34,8 +37,8 @@ int	parsing(t_env *env)
 		{
 			if (((x == 0 || x == env->img.x - 1 || y == 0 || y == env->img.y
 						- 1) && env->img.map[x][y] != '1')
-				|| !check_elem(env->img.map[x][y]))
-				return (fail());
+				|| !check_elem(env->img.map[x][y], env))
+				return (fail(env->img.i));
 			if (env->img.map[x][y] == 'P' || env->img.map[x][y] == 'E'
 				|| env->img.map[x][y] == 'C')
 				define_spawn(x, y, env->img.map, &count);
