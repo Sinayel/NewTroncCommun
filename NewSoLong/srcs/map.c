@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:31:27 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/09 17:41:40 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 18:13:59 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	**copy_map(t_env *env)
 	copy = malloc(sizeof(char *) * (env->img.x + 1));
 	while (i < env->img.x)
 	{
-		copy[i] = strdup(env->img.map[i]);
+		copy[i] = ft_strdup(env->img.map[i]);
 		i++;
 	}
 	copy[i] = NULL;

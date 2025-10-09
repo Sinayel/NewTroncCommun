@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:30:51 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/09 17:43:33 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 18:08:39 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,11 @@ void		print_error(int i);
 void		free_map(char **map);
 void		clean_exit(t_env *env);
 void		putstr_fd(char *str, int fd);
+int			exit_error(void);
 
 //! Map
 int			init_map(t_env *env, int fd);
-void		define_spawn(int x, int y, char **map, int *count);
+void		define_spawn(int x, int y, char **map);
 char		**copy_map(t_env *env);
 void		print_map(void);
 int			render_map(void);

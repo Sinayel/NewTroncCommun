@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wextra -Werror -Iminilibx-linux -INewLibft -INewGetNextLi -g3
+CFLAGS = -Wall -Wextra -Werror -Iminilibx-linux -INewLibft -INewGetNextLine -g3
 
 RM = rm -rf
 

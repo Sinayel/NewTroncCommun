@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:01:30 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/09 17:43:00 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 18:04:52 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	main(int argc, char *argv[])
 		env = get_data();
 		fd = open(argv[1], O_RDONLY);
 		if (fd == -1)
-			return (0);
+			return (exit_error());
 		check_ber(argv[1], env);
 		init_all(env, argv[1]);
 		if (init_map(env, fd))
@@ -107,5 +107,5 @@ int	main(int argc, char *argv[])
 			clean_exit(env);
 		game_loop(env);
 	}
-	return (0);
+	return (exit_error());
 }

@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 14:50:19 by ylouvel           #+#    #+#             */
-/*   Updated: 2025/10/08 23:34:46 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 18:14:56 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdlib.h>
 # include <stdio.h>
-# include <string.h>
 # include <unistd.h>
 
 typedef struct s_list

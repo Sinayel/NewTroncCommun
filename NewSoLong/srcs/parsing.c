@@ -6,11 +6,17 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:29:29 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/09 17:41:53 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 18:08:29 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
+
+int	exit_error(void)
+{
+	putstr_fd("Error\n", 2);
+	return (0);
+}
 
 int	fail(int i)
 {
@@ -25,11 +31,9 @@ int	parsing(t_env *env)
 {
 	int	x;
 	int	y;
-	int	count;
 
 	x = 0;
 	y = 0;
-	count = 0;
 	while (env->img.map[x])
 	{
 		y = 0;
@@ -41,7 +45,7 @@ int	parsing(t_env *env)
 				return (fail(env->img.i));
 			if (env->img.map[x][y] == 'P' || env->img.map[x][y] == 'E'
 				|| env->img.map[x][y] == 'C')
-				define_spawn(x, y, env->img.map, &count);
+				define_spawn(x, y, env->img.map);
 			y++;
 		}
 		x++;
@@ -49,7 +53,7 @@ int	parsing(t_env *env)
 	return (1);
 }
 
-void	define_spawn(int x, int y, char **map, int *count)
+void	define_spawn(int x, int y, char **map)
 {
 	t_env	*env;
 
@@ -61,8 +65,6 @@ void	define_spawn(int x, int y, char **map, int *count)
 	}
 	if (map[x][y] == 'C')
 		env->img.count_c++;
-	else
-		(*count)++;
 }
 
 void	check_path(char **map, int x, int y)
