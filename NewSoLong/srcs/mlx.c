@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 05:12:27 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/08 23:31:59 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 01:53:22 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,9 @@ void	display_choice(char c, t_env *env, int x, int y)
 		display_image(env, "sprites/fond.xpm", x * 40, y * 40);
 }
 
-void write_exit_mv(t_env *env)
-{
-	if(env->img.mv_count != 0)
-		ft_putnbr_fd(env->img.mv_count, 1);
-	else
-		ft_putnbr_fd(++env->img.mv_count, 1);
-	putstr_fd("\nExit\n", 1);
-}
-
 void	clean_exit(t_env *env)
 {
-	write_exit_mv(env);
+	putstr_fd("Exit\n", 1);
 	if(env->img.map)
 	{
 		free_map(env->img.map);

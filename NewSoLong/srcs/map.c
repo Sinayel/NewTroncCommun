@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:31:27 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/08 23:41:21 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 01:21:51 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	init_map(t_env *env, int fd)
 		{
 			free(line);
 			line = get_next_line(fd);
+			env->img.i = 1;
 			continue ;
 		}
 		env->img.map[env->img.x] = ft_strdup(line);

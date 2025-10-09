@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 22:57:35 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/08 22:59:17 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 10:41:11 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,16 @@ int	handle_key(int keycode, t_env *env)
 		|| keycode == 65363 || keycode == 65364 || keycode == 65362
 		|| keycode == 65361)
 		handle_keycode(keycode, &new_x, &new_y);
-	if (keycode == 65307 || (env->img.map[new_x][new_y] == 'E'
-		&& env->img.obj == env->img.count_c))
-		clean_exit(env);
 	if (env->img.map[new_x][new_y] == 'C' && env->img.obj < env->img.count_c)
 	{
 		env->img.obj++;
 		env->img.map[new_x][new_y] = '0';
 		display_choice('0', env, new_x, new_y);
 	}
-	if (env->img.map[new_x][new_y] != '1')
+	if (env->img.map[new_x][new_y] != '1' || keycode == 65307)
 		check_wall(env, new_x, new_y, keycode);
+	if (keycode == 65307 || (env->img.map[new_x][new_y] == 'E'
+		&& env->img.obj == env->img.count_c))
+			clean_exit(env);
 	return (0);
 }
