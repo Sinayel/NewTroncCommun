@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:28:13 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/09 13:47:50 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 17:40:28 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,20 +82,4 @@ int	count_lines(char *url_map)
 	}
 	close(fd);
 	return (count);
-}
-
-void	free_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	if (!map)
-		return ;
-	
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
 }

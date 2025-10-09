@@ -6,19 +6,19 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:29:29 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/09 11:25:08 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 17:41:53 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-int fail(int i)
+int	fail(int i)
 {
-	if(i == 1)
+	if (i == 1)
 		print_error(5);
 	else
 		print_error(2);
-	return 0;
+	return (0);
 }
 
 int	parsing(t_env *env)

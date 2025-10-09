@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 22:57:35 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/09 13:48:47 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 17:42:23 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ int	handle_key(int keycode, t_env *env)
 		check_wall(env, new_x, new_y, keycode);
 	if (keycode == 65307 || (env->img.map[new_x][new_y] == 'E'
 		&& env->img.obj == env->img.count_c))
-			clean_exit(env);
+		clean_exit(env);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 22:55:11 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/09 14:41:58 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 17:42:30 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	check_elem(char map, t_env *env)
 void	check_wall(t_env *env, int new_x, int new_y, int keycode)
 {
 	char	*mv_str;
+
 	if (keycode == 122 || keycode == 115 || keycode == 113 || keycode == 100
 		|| keycode == 65363 || keycode == 65364 || keycode == 65362
 		|| keycode == 65361 || keycode == 65307)
@@ -51,14 +52,14 @@ void	check_wall(t_env *env, int new_x, int new_y, int keycode)
 		env->img.spawn_y * 40);
 }
 
-void check_parsing(t_env *env)
+void	check_parsing(t_env *env)
 {
-	char **cpy_map;
+	char	**cpy_map;
 
 	cpy_map = copy_map(env);
 	check_path(cpy_map, env->img.spawn_x, env->img.spawn_y);
-	if (env->img.found_c == env->img.count_c
-		&& env->img.found_e == 1 && env->img.found_p == 1)
+	if (env->img.found_c == env->img.count_c && env->img.found_e == 1
+		&& env->img.found_p == 1)
 	{
 		if (cpy_map)
 			free_map(cpy_map);
@@ -66,7 +67,7 @@ void check_parsing(t_env *env)
 	}
 	else
 	{
-		if(env->img.found_e > 1 || env->img.found_p > 1)
+		if (env->img.found_e > 1 || env->img.found_p > 1)
 			print_error(4);
 		else
 			print_error(3);

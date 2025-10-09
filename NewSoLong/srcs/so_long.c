@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:01:30 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/09 14:44:54 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 17:43:00 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,25 @@
 //     return (clean);
 // }
 
-int cross_close(t_env *env)
+void	free_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	if (!map)
+		return ;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+}
+
+int	cross_close(t_env *env)
 {
 	clean_exit(env);
-	return 0;
+	return (0);
 }
 
 t_env	*init_all(t_env *env, char *url_map)
@@ -57,11 +72,12 @@ t_env	*init_all(t_env *env, char *url_map)
 	return (env);
 }
 
-void game_loop(t_env *env)
+void	game_loop(t_env *env)
 {
-	env->win = mlx_new_window(env->mlx, env->img.y * 40, env->img.x * 40, "So Long");
+	env->win = mlx_new_window(env->mlx, env->img.y * 40, env->img.x * 40,
+			"So Long");
 	render_map();
-	mlx_hook(env->win, 17, 1L<<0, cross_close, env);
+	mlx_hook(env->win, 17, 1L << 0, cross_close, env);
 	mlx_key_hook(env->win, handle_key, env);
 	mlx_do_key_autorepeaton(env->mlx);
 	mlx_loop(env->mlx);
@@ -69,11 +85,11 @@ void game_loop(t_env *env)
 
 int	main(int argc, char *argv[])
 {
+	t_env	*env;
+	int		fd;
+
 	if (argc == 2)
 	{
-		t_env	*env;
-		int		fd;
-
 		env = get_data();
 		fd = open(argv[1], O_RDONLY);
 		if (fd == -1)
@@ -87,7 +103,7 @@ int	main(int argc, char *argv[])
 			else
 				clean_exit(env);
 		}
-		if(env->img.gnl_error == 1)
+		if (env->img.gnl_error == 1)
 			clean_exit(env);
 		game_loop(env);
 	}

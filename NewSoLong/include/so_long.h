@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:30:51 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/09 14:41:41 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 17:43:33 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,10 @@ int			render_map(void);
 int			parsing(t_env *env);
 void		check_path(char **map, int x, int y);
 int			check_elem(char map, t_env *env);
-void 		check_parsing(t_env *env);
+void		check_parsing(t_env *env);
 void		check_ber(char *str, t_env *env);
 
 //* Handle
-int 		handle_key_press(int keycode, t_env *env);
 void		handle_keycode(int keycode, int *new_x, int *new_y);
 int			handle_key(int keycode, t_env *env);
 
@@ -81,6 +80,6 @@ int			handle_key(int keycode, t_env *env);
 void		display_image(t_env *env, char *xpm, int x, int y);
 void		display_choice(char c, t_env *env, int x, int y);
 int			render_map(void);
-void 		check_wall(t_env *env, int new_x, int new_y, int keycode);
+void		check_wall(t_env *env, int new_x, int new_y, int keycode);
 
 #endif

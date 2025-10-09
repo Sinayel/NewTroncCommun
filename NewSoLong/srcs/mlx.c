@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 05:12:27 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/09 14:14:37 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 17:41:46 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ void	display_choice(char c, t_env *env, int x, int y)
 void	clean_exit(t_env *env)
 {
 	putstr_fd("Exit\n", 1);
-	if(env->img.map)
+	if (env->img.map)
 	{
 		free_map(env->img.map);
 		env->img.map = NULL;
 	}
-	if(env->win)
+	if (env->win)
 	{
 		mlx_destroy_window(env->mlx, env->win);
 		mlx_destroy_display(env->mlx);
@@ -83,7 +83,7 @@ void	clean_exit(t_env *env)
 		env->win = NULL;
 		env->mlx = NULL;
 	}
-	if(env->mlx)
+	if (env->mlx)
 	{
 		mlx_destroy_display(env->mlx);
 		free(env->mlx);
