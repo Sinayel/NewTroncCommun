@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:01:30 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/09 14:22:31 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 14:44:54 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ int	main(int argc, char *argv[])
 		fd = open(argv[1], O_RDONLY);
 		if (fd == -1)
 			return (0);
-		init_all(env, argv[1]);
 		check_ber(argv[1], env);
+		init_all(env, argv[1]);
 		if (init_map(env, fd))
 		{
 			if (parsing(env))
