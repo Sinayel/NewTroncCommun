@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:31:27 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/09 01:21:51 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 14:21:22 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void len_error(t_env *env, int fd)
 {
 	if(env->img.i == 1)
 		print_error(1);
+	env->img.i = 0;
 	env->img.map[env->img.x] = NULL;
 	close(fd);
 }

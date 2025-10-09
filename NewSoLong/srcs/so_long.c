@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:01:30 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/09 10:33:32 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 14:22:31 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@
 //     return (clean);
 // }
 
+int cross_close(t_env *env)
+{
+	clean_exit(env);
+	return 0;
+}
+
 t_env	*init_all(t_env *env, char *url_map)
 {
 	env->img.map = malloc(sizeof(char *) * (count_lines(url_map) + 1));
@@ -53,10 +59,10 @@ t_env	*init_all(t_env *env, char *url_map)
 
 void game_loop(t_env *env)
 {
-	env->win = mlx_new_window(env->mlx, 800, 600, "So Long");
+	env->win = mlx_new_window(env->mlx, env->img.y * 40, env->img.x * 40, "So Long");
 	render_map();
+	mlx_hook(env->win, 17, 1L<<0, cross_close, env);
 	mlx_key_hook(env->win, handle_key, env);
-	mlx_hook(env->win, 2, 1L<<0, handle_key_press, env);
 	mlx_do_key_autorepeaton(env->mlx);
 	mlx_loop(env->mlx);
 }

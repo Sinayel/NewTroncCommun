@@ -20,6 +20,9 @@ all: $(NAME)
 mlx:
 	git clone https://github.com/42Paris/minilibx-linux.git minilibx-linux
 
+vgcore:
+	@$(RM) vgcore.*
+
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 

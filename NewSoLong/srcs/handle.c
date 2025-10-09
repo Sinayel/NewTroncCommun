@@ -6,26 +6,11 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 22:57:35 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/09 10:41:11 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 13:48:47 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-
-int handle_key_press(int keycode, t_env *env)
-{
-	if (keycode == 119)
-		env->img.key_w = 1;
-	if (keycode == 97)
-		env->img.key_a = 1;
-	if (keycode == 115)
-		env->img.key_s = 1;
-	if (keycode == 100)
-		env->img.key_d = 1;
-	if (keycode == 65307)
-		clean_exit(env);
-	return 0;
-}
 
 void	handle_keycode(int keycode, int *new_x, int *new_y)
 {

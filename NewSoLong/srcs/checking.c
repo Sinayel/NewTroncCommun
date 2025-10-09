@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 22:55:11 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/09 10:35:54 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/09 13:53:42 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	check_wall(t_env *env, int new_x, int new_y, int keycode)
 		|| keycode == 65363 || keycode == 65364 || keycode == 65362
 		|| keycode == 65361 || keycode == 65307)
 	{
-		if (keycode == 65307)
+		if (keycode == 65307 && env->img.mv_count == 0)
 			ft_putnbr_fd(0, 1);
 		else if (keycode != 65307)
 			ft_putnbr_fd(++env->img.mv_count, 1);
