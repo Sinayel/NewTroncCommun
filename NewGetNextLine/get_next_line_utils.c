@@ -6,11 +6,24 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 18:16:14 by yanis             #+#    #+#             */
-/*   Updated: 2025/09/29 15:31:32 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/24 00:51:12 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int	found_new_line(char *stash)
+{
+	if (!stash)
+		return (0);
+	while (*stash)
+	{
+		if (*stash == '\n')
+			return (1);
+		stash++;
+	}
+	return (0);
+}
 
 int	ft_strlen(char *str)
 {
@@ -26,30 +39,23 @@ int	ft_strlen(char *str)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	char	*str;
+	size_t	len1;
+	size_t	len2;
+	char	*res;
 	size_t	i;
-	size_t	j;
 
-	if (!s1)
-	{
-		s1 = malloc(1);
-		if (!s1)
-			return (NULL);
-		s1[0] = '\0';
-	}
-	if (!s2)
-		return (s1);
-	i = -1;
-	j = 0;
-	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!str)
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	i = 0;
+	res = malloc(len1 + len2 + 1);
+	if (!res)
 		return (NULL);
-	while (s1[++i])
-		str[i] = s1[i];
-	while (s2[j])
-		str[i++] = s2[j++];
-	str[i] = 0;
-	return (str);
+	while (s1 && *s1)
+		res[i++] = *s1++;
+	while (s2 && *s2)
+		res[i++] = *s2++;
+	res[i] = '\0';
+	return (res);
 }
 
 char	*ft_strchr(const char *s, int c)
