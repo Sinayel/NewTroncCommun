@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylouvel <ylouvel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 15:11:23 by ylouvel           #+#    #+#             */
-/*   Updated: 2025/09/21 15:15:22 by ylouvel          ###   ########.fr       */
+/*   Updated: 2025/10/19 23:36:13 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,22 @@ int	ft_atoi(const char *str)
 			sign = -1;
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	while (str[i] >= '0' && qstr[i] <= '9')
 	{
 		res = res * 10 + str[i] - '0';
 		i++;
 	}
 	return (res * sign);
+}
+
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+	int result;
+	result = ft_atoi("98778978978789789890989890890890898908908989089");
+	printf("%d\n", result);
+	result = atoi("98778978978789789890989890890890898908908989089");
+	printf("%d\n", result);
+	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:30:51 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/09 18:08:39 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/11 21:13:27 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void		print_error(int i);
 void		free_map(char **map);
 void		clean_exit(t_env *env);
 void		putstr_fd(char *str, int fd);
-int			exit_error(void);
+int			exit_error(int i);
 
 //! Map
 int			init_map(t_env *env, int fd);

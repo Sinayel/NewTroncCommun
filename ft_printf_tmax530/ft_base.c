@@ -6,13 +6,13 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 23:30:59 by yanis             #+#    #+#             */
-/*   Updated: 2025/09/23 21:18:40 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/22 01:53:35 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_puthex(unsigned int nb, char c)
+int	ft_puthex(unsigned long nb, char c)
 {
 	int	i;
 

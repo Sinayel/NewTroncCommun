@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 18:16:12 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/02 18:52:08 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/11 21:16:36 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,13 @@ char	*get_next_line(int fd)
 		stash = ft_strjoiin(stash, buffer);
 	}
 	if (!stash)
+	{
+		printf("Slt c'est greg\n");
 		return (NULL);
+	}
 	line = take_line(stash);
+	if(line)
+		printf("Pourquoi greg ?\n");
 	stash = save(stash);
 	return (line);
 }

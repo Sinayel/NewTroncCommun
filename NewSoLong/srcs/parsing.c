@@ -6,15 +6,18 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:29:29 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/09 18:08:29 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/11 20:40:08 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-int	exit_error(void)
+int	exit_error(int i)
 {
-	putstr_fd("Error\n", 2);
+	if(i == 1)
+		putstr_fd("Error\nNo map was found try a files who exist\n", 2);
+	else if(i == 2)
+		putstr_fd("Error\nPlease only 2 arguments is required\n", 2);
 	return (0);
 }
 

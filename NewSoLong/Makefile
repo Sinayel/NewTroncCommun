@@ -23,6 +23,10 @@ mlx:
 vgcore:
 	@$(RM) vgcore.*
 
+gnl:
+	$(MAKE) -C $(GNL_DIR) fclean
+	$(MAKE) -C $(GNL_DIR)
+
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
