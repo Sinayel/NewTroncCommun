@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/14 17:09:50 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/22 00:43:04 by yanis            ###   ########.fr       */
+/*   Created: 2025/10/27 00:41:38 by yanis             #+#    #+#             */
+/*   Updated: 2025/10/27 09:52:05 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-#define PUSH_SWAP_H
+#include "../include/push_swap.h"
 
-#include <stdio.h>
-#include <time.h>
-#include <stdlib.h>
-
-typedef struct s_stack
+void	print_list(t_stack *stack)
 {
-	int nb;
-	int id;
-	struct s_stack *next;
-} t_stack;
+	printf("Stack A :\n");
+	while (stack)
+	{
+		printf("[%d]%d\n", stack->index, stack->value);
+		stack = stack->next;
+	}
+}
 
-#endif
+int	main(int argc, char *argv[])
+{
+	if (argc >= 2)
+	{
+		t_stack *stackA;
+		stackA = init_stack(argc, argv);
+		print_list(stackA);
+	}
+	return (0);
+}
