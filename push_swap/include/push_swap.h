@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylouvel <ylouvel@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 00:47:22 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/27 09:36:18 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/27 20:39:47 by ylouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include "../libft/libft.h"
+# include <limits.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -39,11 +40,16 @@ void				sort_three(t_stack **stack);
 
 //? Linked List
 t_stack				*init_stack(int argc, char *argv[]);
+t_stack				*init_stackB(void);
+void				free_stack(t_stack **stack);
+// Commands
+void				ft_rotate(t_stack **stack, char name);
+void				ft_push(t_stack **from, t_stack **to, char name);
 
 //* Utils
 t_stack				*get_dataS(void);
 t_data				*get_data(void);
-void				free_stack(t_stack **stack);
+int					strlenStack(t_stack *stack);
 int					is_digit_tab(char *argv);
 int					tabLen(char **argv);
 void				free_tabtab(char **argv);

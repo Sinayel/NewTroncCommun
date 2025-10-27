@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylouvel <ylouvel@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 00:47:24 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/27 09:50:09 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/27 20:27:42 by ylouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,20 @@ void	free_tabtab(char **argv)
 		i++;
 	}
 	free(argv);
+}
+
+int strlenStack(t_stack *stack)
+{
+	t_stack	*tmp;
+	int i;
+	i = 0;
+	tmp = stack;
+	while(tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	return i;
 }
 
 int tabLen(char **argv)

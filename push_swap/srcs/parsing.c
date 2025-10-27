@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 01:27:30 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/27 09:44:12 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/27 10:20:29 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,21 @@ void	check_argv(int argc, char *argv[])
 
 t_data	*parsing(int argc, char *argv[])
 {
-    t_data *data;
-    data = malloc(sizeof(t_data));
-    if(!data)
-        return NULL;
-    if(argc == 2)
-    {
-        data->args = ft_split(argv[1], ' '); //! A free !!!
-        check_argv(tabLen(data->args), data->args);
-        return data;
-    }
+	t_data *data;
+	data = malloc(sizeof(t_data));
+	if (!data)
+		return (NULL);
+	if (argc == 2)
+	{
+		data->args = ft_split(argv[1], ' '); //! A free !!!
+		check_argv(tabLen(data->args), data->args);
+		return (data);
+	}
 	else if (argc > 2)
-    {
-        data->args = argv;
+	{
+		data->args = argv;
 		check_argv(argc, data->args);
-        return (data);
-    }
-    return NULL;
+		return (data);
+	}
+	return (NULL);
 }
