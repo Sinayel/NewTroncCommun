@@ -26,6 +26,6 @@
 
 ---
 
-## 📸 Test
+## 📸
 
-![Screenshot du test]()
+![Tronc Commun](tronc_commun.png)
