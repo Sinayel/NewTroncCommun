@@ -41,7 +41,10 @@ void	check_argv(int argc, char *argv[])
 t_data	*parsing(int argc, char *argv[])
 {
 	t_data *data;
-	data = malloc(sizeof(t_data));
+
+	/* Use the global/static data so other parts of the program (get_data())
+	   see the parsed arguments. */
+	data = get_data();
 	if (!data)
 		return (NULL);
 	if (argc == 2)

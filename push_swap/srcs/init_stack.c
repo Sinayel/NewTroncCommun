@@ -6,7 +6,7 @@
 /*   By: ylouvel <ylouvel@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 00:47:26 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/27 20:45:17 by ylouvel          ###   ########.fr       */
+/*   Updated: 2025/10/28 12:48:22 by ylouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ t_stack	*init_stack(int argc, char *argv[])
 	if (!stack)
 		return (NULL);
 	stack->value = ft_atoi(argv[1]);
+	stack->data.count = 0;
 	stack->index = -1;
 	stack->next = NULL;
 	i = 1;

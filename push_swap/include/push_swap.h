@@ -6,7 +6,7 @@
 /*   By: ylouvel <ylouvel@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 00:47:22 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/27 20:39:47 by ylouvel          ###   ########.fr       */
+/*   Updated: 2025/10/28 12:47:43 by ylouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 typedef struct s_data
 {
 	char			**args;
+	int				count;
 }					t_data;
 
 typedef struct s_stack
