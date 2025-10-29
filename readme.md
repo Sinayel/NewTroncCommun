@@ -13,10 +13,11 @@
 
 | Projet | Statut | Notes |
 |---|---:|---|
-| `libft` | ✅ **Terminé** | Manque les bonus |
-| `ft_printf` | ✅ **Terminé** | A Verifier |
-| `get_next_line` | ✅ **Terminé** | Manque le bonus |
-| `so_long` | 🚧**En Travaux** | Manque seulement l'affichage |
+| `libft` | ✅ **Terminé** | 125% |
+| `ft_printf` | ✅ **Terminé** | 100% |
+| `get_next_line` | ✅ **Terminé** | 100% |
+| `so_long` | ✅ **Terminé** | Manque les bonus |
+| `push_swap` | ✅ **Terminé** | Manque les bonus |
 | Autres projets du tronc commun | ❌ *À compléter* | |
 
 ---
