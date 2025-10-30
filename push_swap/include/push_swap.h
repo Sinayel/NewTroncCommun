@@ -6,18 +6,18 @@
 /*   By: ylouvel <ylouvel@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 00:47:22 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/28 12:47:43 by ylouvel          ###   ########.fr       */
+/*   Updated: 2025/10/30 22:52:44 by ylouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "../libft/libft.h"
-# include <limits.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+#include "../libft/libft.h"
+#include <limits.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 typedef struct s_data
 {
@@ -41,14 +41,14 @@ void				sort_three(t_stack **stack);
 
 //? Linked List
 t_stack				*init_stack(int argc, char *argv[]);
-t_stack				*init_stackB(void);
 void				free_stack(t_stack **stack);
 // Commands
 void				ft_rotate(t_stack **stack, char name);
 void				ft_push(t_stack **from, t_stack **to, char name);
+void				ft_reverse_rotate(t_stack **stack, char name);
+void				ft_swap(t_stack **stack, char name);
 
 //* Utils
-t_stack				*get_dataS(void);
 t_data				*get_data(void);
 int					strlenStack(t_stack *stack);
 int					is_digit_tab(char *argv);

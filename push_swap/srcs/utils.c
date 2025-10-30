@@ -6,17 +6,11 @@
 /*   By: ylouvel <ylouvel@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 00:47:24 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/27 20:27:42 by ylouvel          ###   ########.fr       */
+/*   Updated: 2025/10/30 22:46:49 by ylouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-
-t_stack	*get_dataS(void)
-{
-	static t_stack stack;
-	return (&stack);
-}
 
 t_data *get_data(void)
 {
@@ -78,4 +72,33 @@ int	is_digit_tab(char *argv)
 			return (0);
 	}
 	return (1);
+}
+
+int	find_min(t_stack *stack)
+{
+	int min;
+
+	if (!stack)
+		return (0);
+	min = stack->value;
+	while (stack)
+	{
+		if (stack->value < min)
+			min = stack->value;
+		stack = stack->next;
+	}
+	return (min);
+}
+
+int	index_of(t_stack *stack, int value)
+{
+	int i = 0;
+	while (stack)
+	{
+		if (stack->value == value)
+			return (i);
+		stack = stack->next;
+		i++;
+	}
+	return (-1);
 }

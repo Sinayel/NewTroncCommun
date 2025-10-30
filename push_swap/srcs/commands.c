@@ -6,7 +6,7 @@
 /*   By: ylouvel <ylouvel@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 19:21:46 by ylouvel           #+#    #+#             */
-/*   Updated: 2025/10/28 12:56:31 by ylouvel          ###   ########.fr       */
+/*   Updated: 2025/10/30 22:44:58 by ylouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,45 @@ void	ft_rotate(t_stack **stack, char name)
 	printf("r%c\n", name);
 }
 
+void	ft_swap(t_stack **stack, char name)
+{
+	t_stack *first;
+	t_stack *second;
+	t_data *data;
 
+	data = get_data();
+	if (!*stack || !(*stack)->next)
+		return;
+	first = *stack;
+	second = first->next;
+	first->next = second->next;
+	second->next = first;
+	*stack = second;
+	data->count++;
+	printf("s%c\n", name);
+}
+
+void	ft_reverse_rotate(t_stack **stack, char name)
+{
+	t_stack *prev;
+	t_stack *last;
+	t_stack *head;
+	t_data *data;
+
+	data = get_data();
+	if (!*stack || !(*stack)->next)
+		return;
+	head = *stack;
+	prev = NULL;
+	last = *stack;
+	while (last->next)
+	{
+		prev = last;
+		last = last->next;
+	}
+	prev->next = NULL;
+	last->next = head;
+	*stack = last;
+	data->count++;
+	printf("rr%c\n", name);
+}

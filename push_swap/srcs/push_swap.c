@@ -6,7 +6,7 @@
 /*   By: ylouvel <ylouvel@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 00:41:38 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/29 16:33:38 by ylouvel          ###   ########.fr       */
+/*   Updated: 2025/10/30 22:58:28 by ylouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,6 @@ void	print_list(t_stack *stack, int i)
 	printf("\n");
 }
 
-// void	push_swap(t_stack **stack_a, t_stack **stack_b)
-// {
-// 	t_stack	*head_a;
-// 	t_stack	*head_b;
-// 	head_a = *stack_a;
-// 	head_b = *stack_b;
-// 	// radix sort
-// 	radix_sort(&head_a, &head_b);
-// 	*stack_a = head_a;
-// 	*stack_b = head_b;
-// }
-
 int	is_sorted(t_stack *stackA)
 {
 	t_stack	*tmp;
@@ -51,7 +39,6 @@ int	is_sorted(t_stack *stackA)
 	{
 		if (i > tmp->value)
 			sorted = 1;
-		;
 		i = tmp->value;
 		tmp = tmp->next;
 	}
@@ -59,7 +46,6 @@ int	is_sorted(t_stack *stackA)
 		return (0);
 	return (1);
 }
-
 void	push_swap(t_stack **stackA, t_stack **stackB)
 {
 	int	max_bits;
@@ -89,27 +75,52 @@ void	push_swap(t_stack **stackA, t_stack **stackB)
 	}
 }
 
-void	print_bin(void)
+void	sort_three(t_stack **a)
 {
-	int	i;
-	int	bit;
-	int	size;
-
-	i = 0;
-	size = 0;
-	bit = 10;
-	while (10 >> size)
-		size++;
-	printf("size : %d\n", size);
-	i = size - 1;
-	while (i >= 0)
+	if (!a || !*a || !(*a)->next || !(*a)->next->next)
+		return ;
+	if (is_sorted(*a))
+		return ;
+	if ((*a)->value > (*a)->next->value
+		&& (*a)->value > (*a)->next->next->value)
 	{
-		if (((bit >> i) & 1))
-			printf("1");
-		else
-			printf("0");
-		i--;
+		ft_rotate(a, 'a');
+		if ((*a)->value > (*a)->next->value)
+			ft_swap(a, 'a');
 	}
+	else if ((*a)->next->value > (*a)->value
+		&& (*a)->next->value > (*a)->next->next->value)
+	{
+		ft_reverse_rotate(a, 'a');
+		if ((*a)->value > (*a)->next->value)
+			ft_swap(a, 'a');
+	}
+	else if ((*a)->value > (*a)->next->value)
+		ft_swap(a, 'a');
+}
+
+void	sort_four_to_five_elements(t_stack **a, t_stack **b)
+{
+	int	pushed;
+
+	pushed = 0;
+	while (pushed < 2)
+	{
+		if ((*a)->index == 0 || (*a)->index == 1)
+		{
+			ft_push(a, b, 'b');
+			pushed++;
+		}
+		else
+			ft_rotate(a, 'a');
+	}
+	if (*b && (*b)->index == 0 && (*b)->next && (*b)->next->index == 1)
+		ft_swap(b, 'b');
+	sort_three(a);
+	ft_push(b, a, 'a');
+	ft_push(b, a, 'a');
+	if ((*a)->index > (*a)->next->index)
+		ft_swap(a, 'a');
 }
 
 int	main(int argc, char *argv[])
@@ -123,12 +134,19 @@ int	main(int argc, char *argv[])
 		data = get_data();
 		stackB = NULL;
 		stackA = init_stack(argc, argv); //* Parsing fini
-		is_sorted(stackA);
-		push_swap(&stackA, &stackB);
+		if (!is_sorted(stackA) && strlenStack(stackA) == 2)
+			ft_swap(&stackA, 'a');
+		else if (strlenStack(stackA) == 3)
+			sort_three(&stackA);
+		else if (strlenStack(stackA) == 5 || strlenStack(stackA) == 4)
+			sort_four_to_five_elements(&stackA, &stackB);
+		else if(strlenStack(stackA) > 5)
+			push_swap(&stackA, &stackB);
 		print_list(stackA, 1);
 		print_list(stackB, 0);
 		printf("data count: %d\n", data->count);
-		print_bin();
+		free_stack(&stackA);
+		free_stack(&stackB);
 	}
 	return (0);
 }
