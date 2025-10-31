@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylouvel <ylouvel@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 00:47:22 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/31 02:58:55 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/31 04:02:28 by ylouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void				ft_swap(t_stack **stack, char name);
 
 //* Utils
 t_data				*get_data(void);
-int					strlenStack(t_stack *stack);
+int					strlen_stack(t_stack *stack);
 int					is_digit_tab(char *argv);
-int					tabLen(char **argv);
+int					tab_len(char **argv);
 void				free_tabtab(char **argv);
 
 #endif

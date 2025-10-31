@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylouvel <ylouvel@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 19:21:46 by ylouvel           #+#    #+#             */
-/*   Updated: 2025/10/31 03:00:34 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/31 04:22:46 by ylouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,28 @@
 void	ft_push(t_stack **from, t_stack **to, char name)
 {
 	t_stack	*tmp;
-	t_data *data;
-	data = get_data();
+	t_data	*data;
 
+	data = get_data();
 	if (!*from)
-		return;
+		return ;
 	tmp = *from;
 	*from = (*from)->next;
 	tmp->next = *to;
 	*to = tmp;
 	data->count++;
-	(void)name;
-    // printf("p%c\n", name);
+	printf("p%c\n", name);
 }
 
 void	ft_rotate(t_stack **stack, char name)
 {
 	t_stack	*first;
 	t_stack	*last;
-	t_data *data;
-	data = get_data();
+	t_data	*data;
 
+	data = get_data();
 	if (!*stack || !(*stack)->next)
-		return;
+		return ;
 	first = *stack;
 	*stack = (*stack)->next;
 	last = *stack;
@@ -46,19 +45,18 @@ void	ft_rotate(t_stack **stack, char name)
 	last->next = first;
 	first->next = NULL;
 	data->count++;
-	(void)name;
-	// printf("r%c\n", name);
+	printf("r%c\n", name);
 }
 
 void	ft_swap(t_stack **stack, char name)
 {
-	t_stack *first;
-	t_stack *second;
-	t_data *data;
+	t_stack	*first;
+	t_stack	*second;
+	t_data	*data;
 
 	data = get_data();
 	if (!*stack || !(*stack)->next)
-		return;
+		return ;
 	first = *stack;
 	second = first->next;
 	first->next = second->next;
@@ -70,14 +68,14 @@ void	ft_swap(t_stack **stack, char name)
 
 void	ft_reverse_rotate(t_stack **stack, char name)
 {
-	t_stack *prev;
-	t_stack *last;
-	t_stack *head;
-	t_data *data;
+	t_stack	*prev;
+	t_stack	*last;
+	t_stack	*head;
+	t_data	*data;
 
 	data = get_data();
 	if (!*stack || !(*stack)->next)
-		return;
+		return ;
 	head = *stack;
 	prev = NULL;
 	last = *stack;

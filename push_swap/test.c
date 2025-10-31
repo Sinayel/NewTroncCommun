@@ -15,21 +15,22 @@ void exec_test(t_stack *stackA, t_stack *stackB, int test[], int len, int i)
     stackA = init_stack_from_array(test, len);
     t_data *data;
     data = get_data();
+    // data = parsing(strlen_stack(stackA), );
 
-    if (!is_sorted(stackA) && strlenStack(stackA) == 2)
+    if (!is_sorted(stackA) && strlen_stack(stackA) == 2)
         ft_swap(&stackA, 'a');
-    else if (strlenStack(stackA) == 3 && !is_sorted(stackA))
+    else if (strlen_stack(stackA) == 3 && !is_sorted(stackA))
         sort_three(&stackA);
-    else if (strlenStack(stackA) == 4 || strlenStack(stackA) == 5)
+    else if (strlen_stack(stackA) == 4 || strlen_stack(stackA) == 5)
         sort_four_to_five_elements(&stackA, &stackB);
-    else if(strlenStack(stackA) > 5)
+    else if(strlen_stack(stackA) > 5)
         push_swap(&stackA, &stackB);
 
     printf("✅Test %d termine | %d coup !\n", i, data->count);
-    if(data->count <= 1100 && strlenStack(stackA) - 1 <= 100)
+    if(data->count <= 1100 && strlen_stack(stackA) - 1 <= 100)
         printf("Ok tier✅\n");
-    else if(data->count <= 11500 && strlenStack(stackA) - 1 <= 500)
-        printf("Size stack : %d\nOk tier✅\n", strlenStack(stackA));
+    else if(data->count <= 11500 && strlen_stack(stackA) - 1 <= 500)
+        printf("Size stack : %d\nOk tier✅\n", strlen_stack(stackA));
     else
         printf("Pas ouf❌\n");
     free_stack(&stackA);
@@ -44,9 +45,14 @@ int main(void)
     t_stack *stackA;
     t_stack *stackB;
 
+    //? Non Valid
+    int testA[] = {0, 1, 4};
+    int testB[] = {0, 2147483647, 0};
+    int testC[] = {-0, 1, 2};
+    int testD[] = {-0, 1, 'y'};
     //! 100
-    int test1[] = {24, 57, 98, 66, 46, 33, 23, 42, 37, 75, 27, 74, 1, 73, 96, 80, 60, 32, 81, 48, 78, 17, 22, 52, 92, 19, 36, 65, 12, 47, 72, 94, 54, 9, 14, 6, 53, 90, 59, 15, 88, 63, 25, 35, 26, 11, 83, 2, 28, 51, 18, 43, 82, 8, 41, 68, 67, 50, 30, 44, 79, 58, 21, 85, 100, 39, 49, 70, 45, 95, 29, 99, 13, 84, 56, 87, 97, 62, 71, 3, 61, 86, 76, 7, 40, 20, 77, 55, 34, 5, 89, 93, 91, 69, 64, 4, 10, 16, 31, 38};
-    int test2[] = {52,67,16,39,11,54,22,63,53,56,36,84,24,13,4,3,44,94,61,2,62,60,17,43,93,81,6,100,74,83,99,69,8,37,73,33,82,5,30,96,55,21,92,14,19,27,76,57,65,18,32,25,86,42,88,70,49,51,47,35,71,50,78,40,38,59,28,95,26,64,12,31,1,7,68,77,10,58,29,98,79,20,87,23,15,48,97,41,9,46,34,91,89,45,85,66,75,80,72,90};
+    int test1[] = {24, 57, INT_MIN, INT_MAX, 46, 33, 23, 42, 37, 75, 27, 74, 1, 73, 96, 80, 60, 32, 81, 48, 78, 17, 22, 52, 92, 19, 36, 65, 12, 47, 72, 94, 54, 9, 14, 6, 53, 90, 59, 15, 88, 63, 25, 35, 26, 11, 83, 2, 28, 51, 18, 43, 82, 8, 41, 68, 67, 50, 30, 44, 79, 58, 21, 85, 100, 39, 49, 70, 45, 95, 29, 99, 13, 84, 56, 87, 97, 62, 71, 3, 61, 86, 76, 7, 40, 20, 77, 55, 34, 5, 89, 93, 91, 69, 64, 4, 10, 16, 31, 38};
+    int test2[] = {52,67,16,INT_MIN,11,54,22,63,53,56,36,84,24,13,4,3,44,94,61,2,62,60,17,43,93,81,6,100,74,83,99,69,8,37,73,33,82,5,30,96,55,21,92,14,19,27,76,57,65,18,32,25,86,42,88,70,49,51,47,35,71,50,78,40,38,59,28,95,26,64,12,31,1,7,68,77,10,58,29,98,79,20,87,23,15,48,97,41,9,46,34,91,89,45,85,66,75,80,72,90};
     int test3[] = {43,49,80,59,27,8,17,21,82,68,6,7,52,1,66,98,35,69,79,57,58,44,60,25,91,61,33,38,84,76,31,45,42,53,13,54,86,46,47,4,41,78,93,73,81,36,87,67,100,32,94,92,20,63,55,95,28,18,83,14,29,51,62,15,90,30,65,64,19,85,74,72,24,23,70,97,75,50,12,16,71,48,77,22,96,2,10,88,37,11,9,89,34,26,40,39,56,3,99,5};
 
     //* 266
@@ -60,6 +66,10 @@ int main(void)
     size_t len_test4 = sizeof(test4) / sizeof(int);
     size_t len_test5 = sizeof(test5) / sizeof(int);
     size_t len_test6 = sizeof(test6) / sizeof(int);
+    size_t len_testa = sizeof(testA) / sizeof(int);
+    size_t len_testb = sizeof(testB) / sizeof(int);
+    size_t len_testc = sizeof(testC) / sizeof(int);
+    size_t len_testd = sizeof(testD) / sizeof(int);
 
     stackB = NULL;
     stackA = NULL;
@@ -70,6 +80,10 @@ int main(void)
     exec_test(stackA, stackB, test4, len_test4, 4);
     exec_test(stackA, stackB, test5, len_test5, 5);
     exec_test(stackA, stackB, test6, len_test6, 6);
+    exec_test(stackA, stackB, testA, len_testa, 9);
+    exec_test(stackA, stackB, testB, len_testb, 8);
+    exec_test(stackA, stackB, testC, len_testc, 9);
+    exec_test(stackA, stackB, testD, len_testd, 10);
 
     printf("✅ Test terminé.\n");
     return 0;

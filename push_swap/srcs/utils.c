@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylouvel <ylouvel@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 00:47:24 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/31 01:23:24 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/31 04:02:21 by ylouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-t_data *get_data(void)
+t_data	*get_data(void)
 {
-	static t_data data;
+	static t_data	data;
+
 	return (&data);
 }
 
@@ -33,26 +34,29 @@ void	free_tabtab(char **argv)
 	free(argv);
 }
 
-int strlenStack(t_stack *stack)
+int	strlen_stack(t_stack *stack)
 {
 	t_stack	*tmp;
-	int i;
+	int		i;
+
 	i = 0;
 	tmp = stack;
-	while(tmp)
+	while (tmp)
 	{
 		tmp = tmp->next;
 		i++;
 	}
-	return i;
+	return (i);
 }
 
-int tabLen(char **argv)
+int	tab_len(char **argv)
 {
-    int i = 0;
-    while(argv[i])
-        i++;
-    return i;
+	int	i;
+
+	i = 0;
+	while (argv[i])
+		i++;
+	return (i);
 }
 
 int	is_digit_tab(char *argv)
@@ -62,43 +66,14 @@ int	is_digit_tab(char *argv)
 	i = -1;
 	while (argv[++i])
 	{
-		if(argv[i] == '-' && i == 0)
+		if (argv[i] == '-' && i == 0)
 		{
 			i++;
 			if (!ft_isdigit(argv[i]) || argv[i] == '0')
 				return (0);
 		}
-		else if(!ft_isdigit(argv[i]))
+		else if (!ft_isdigit(argv[i]))
 			return (0);
 	}
 	return (1);
-}
-
-int	find_min(t_stack *stack)
-{
-	int min;
-
-	if (!stack)
-		return (0);
-	min = stack->value;
-	while (stack)
-	{
-		if (stack->value < min)
-			min = stack->value;
-		stack = stack->next;
-	}
-	return (min);
-}
-
-int	index_of(t_stack *stack, int value)
-{
-	int i = 0;
-	while (stack)
-	{
-		if (stack->value == value)
-			return (i);
-		stack = stack->next;
-		i++;
-	}
-	return (-1);
 }

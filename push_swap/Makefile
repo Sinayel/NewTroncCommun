@@ -8,7 +8,7 @@ LIBFT_DIR = libft
 HEADER = include/push_swap.h
 
 NAME = push_swap
-SRCS = init_stack.c push_swap.c parsing.c commands.c utils.c
+SRCS = init_stack.c push_swap.c parsing.c commands.c sort.c utils.c
 
 SRCS_FILES = $(addprefix $(SRC_DIR)/, $(SRCS))
 OBJS = $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRCS))

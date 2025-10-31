@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylouvel <ylouvel@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 01:27:30 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/31 01:58:10 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/31 04:02:28 by ylouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ long	ft_atol(const char *str)
 
 void	print_error(void)
 {
-	t_data *data;
+	t_data	*data;
+
 	data = get_data();
-	if(data->args && data->split == 1)
+	if (data->args && data->split == 1)
 		free_tabtab(data->args);
 	printf("Error\n");
 	exit(1);
@@ -55,7 +56,7 @@ void	check_argv(int argc, char *argv[], int input_verif)
 	long	nb;
 
 	i = 1;
-	if(input_verif == 0)
+	if (input_verif == 0)
 		i = 0;
 	while (i < argc)
 	{
@@ -70,24 +71,23 @@ void	check_argv(int argc, char *argv[], int input_verif)
 				print_error();
 		i++;
 	}
-	if(argc == 1)
-		if(!is_digit_tab(argv[0]))
+	if (argc == 1)
+		if (!is_digit_tab(argv[0]))
 			print_error();
-	// printf("All good\n");
 }
 
 t_data	*parsing(int argc, char *argv[])
 {
-	t_data *data;
+	t_data	*data;
 
 	data = get_data();
 	if (!data)
 		return (NULL);
 	if (argc == 2)
 	{
-		data->args = ft_split(argv[1], ' '); //! A free !!!
+		data->args = ft_split(argv[1], ' ');
 		data->split = 1;
-		check_argv(tabLen(data->args), data->args, 0);
+		check_argv(tab_len(data->args), data->args, 0);
 		return (data);
 	}
 	else if (argc > 2)
