@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:01:30 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/11 20:39:08 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/31 02:27:36 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int	main(int argc, char *argv[])
 
 	if (argc == 2)
 	{
+		printf("Gros Caca\n");
 		env = get_data();
 		fd = open(argv[1], O_RDONLY);
 		if (fd == -1)
