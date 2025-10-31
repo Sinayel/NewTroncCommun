@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylouvel <ylouvel@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 00:47:22 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/30 22:52:44 by ylouvel          ###   ########.fr       */
+/*   Updated: 2025/10/31 01:57:06 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_data
 {
 	char			**args;
 	int				count;
+	int				split;
 }					t_data;
 
 typedef struct s_stack

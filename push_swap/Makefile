@@ -30,6 +30,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER) | $(OBJ_DIR)
 	@echo -ne "\r\033[1;34m⏳ Compiling $<...\033[0m"
 	@cc $(CFLAGS) -c $< -o $@
 
+libft:
+	git clone git@github.com:Sinayel/libft.git
+
 clean:
 	@echo "\033[0;31m🚮 Cleaning objects...\033[0m"
 	@$(RM) $(OBJ_DIR)
@@ -44,4 +47,4 @@ fclean:
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re libft

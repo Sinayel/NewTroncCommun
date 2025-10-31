@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylouvel <ylouvel@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 00:41:38 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/30 22:58:28 by ylouvel          ###   ########.fr       */
+/*   Updated: 2025/10/31 01:22:10 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,24 +127,24 @@ int	main(int argc, char *argv[])
 {
 	t_stack	*stackA;
 	t_stack	*stackB;
-	t_data	*data;
+	// t_data	*data;
 
 	if (argc >= 2)
 	{
-		data = get_data();
+		// data = get_data();
 		stackB = NULL;
 		stackA = init_stack(argc, argv); //* Parsing fini
 		if (!is_sorted(stackA) && strlenStack(stackA) == 2)
 			ft_swap(&stackA, 'a');
-		else if (strlenStack(stackA) == 3)
+		else if (strlenStack(stackA) == 3 && !is_sorted(stackA))
 			sort_three(&stackA);
 		else if (strlenStack(stackA) == 5 || strlenStack(stackA) == 4)
 			sort_four_to_five_elements(&stackA, &stackB);
 		else if(strlenStack(stackA) > 5)
 			push_swap(&stackA, &stackB);
-		print_list(stackA, 1);
-		print_list(stackB, 0);
-		printf("data count: %d\n", data->count);
+		// print_list(stackA, 1);
+		// print_list(stackB, 0);
+		// printf("data count: %d\n", data->count);
 		free_stack(&stackA);
 		free_stack(&stackB);
 	}
