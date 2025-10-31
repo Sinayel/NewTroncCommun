@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylouvel <ylouvel@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 19:21:46 by ylouvel           #+#    #+#             */
-/*   Updated: 2025/10/30 22:44:58 by ylouvel          ###   ########.fr       */
+/*   Updated: 2025/10/31 03:00:34 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	ft_push(t_stack **from, t_stack **to, char name)
 	tmp->next = *to;
 	*to = tmp;
 	data->count++;
-    printf("p%c\n", name);
+	(void)name;
+    // printf("p%c\n", name);
 }
 
 void	ft_rotate(t_stack **stack, char name)
@@ -45,7 +46,8 @@ void	ft_rotate(t_stack **stack, char name)
 	last->next = first;
 	first->next = NULL;
 	data->count++;
-	printf("r%c\n", name);
+	(void)name;
+	// printf("r%c\n", name);
 }
 
 void	ft_swap(t_stack **stack, char name)
