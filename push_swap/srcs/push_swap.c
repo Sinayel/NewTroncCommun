@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 00:41:38 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/31 02:54:49 by yanis            ###   ########.fr       */
+/*   Updated: 2025/11/21 19:08:55 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,33 +123,33 @@ void	sort_four_to_five_elements(t_stack **a, t_stack **b)
 		ft_swap(a, 'a');
 }
 
-// int	main(int argc, char *argv[])
-// {
-// 	t_stack	*stackA;
-// 	t_stack	*stackB;
-// 	// t_data	*data;
+int	main(int argc, char *argv[])
+{
+	t_stack	*stackA;
+	t_stack	*stackB;
+	// t_data	*data;
 
-// 	if (argc >= 2)
-// 	{
-// 		// data = get_data();
-// 		stackB = NULL;
-// 		stackA = init_stack(argc, argv); //* Parsing fini
-// 		if (!is_sorted(stackA) && strlenStack(stackA) == 2)
-// 			ft_swap(&stackA, 'a');
-// 		else if (strlenStack(stackA) == 3 && !is_sorted(stackA))
-// 			sort_three(&stackA);
-// 		else if (strlenStack(stackA) == 5 || strlenStack(stackA) == 4)
-// 			sort_four_to_five_elements(&stackA, &stackB);
-// 		else if(strlenStack(stackA) > 5)
-// 			push_swap(&stackA, &stackB);
-// 		// print_list(stackA, 1);
-// 		// print_list(stackB, 0);
-// 		// printf("data count: %d\n", data->count);
-// 		free_stack(&stackA);
-// 		free_stack(&stackB);
-// 	}
-// 	return (0);
-// }
+	if (argc >= 2)
+	{
+		// data = get_data();
+		stackB = NULL;
+		stackA = init_stack(argc, argv); //* Parsing fini
+		if (!is_sorted(stackA) && strlenStack(stackA) == 2)
+			ft_swap(&stackA, 'a');
+		else if (strlenStack(stackA) == 3 && !is_sorted(stackA))
+			sort_three(&stackA);
+		else if (strlenStack(stackA) == 5 || strlenStack(stackA) == 4)
+			sort_four_to_five_elements(&stackA, &stackB);
+		else if(strlenStack(stackA) > 5)
+			push_swap(&stackA, &stackB);
+		// print_list(stackA, 1);
+		// print_list(stackB, 0);
+		// printf("data count: %d\n", data->count);
+		free_stack(&stackA);
+		free_stack(&stackB);
+	}
+	return (0);
+}
 
 // ./push_swap 24 57 98 66 46 33 23 42 37 75 27 74 1 73 96 80 60 32 81 48 78 17 22 52 92 19 36 65 12 47 72 94 54 9 14 6 53 90 59 15 88 63 25 35 26 11 83 2 28 51 18 43 82 8 41 68 67 50 30 44 79 58 21 85 100 39 49 70 45 95 29 99 13 84 56 87 97 62 71 3 61 86 76 7 40 20 77 55 34 5 89 93 91 69 64 4 10 16 31 38
 // ./push_swap 52 67 16 39 11 54 22 63 53 56 36 84 24 13 4 3 44 94 61 2 62 60 17 43 93 81 6 100 74 83 99 69 8 37 73 33 82 5 30 96 55 21 92 14 19 27 76 57 65 18 32 25 86 42 88 70 49 51 47 35 71 50 78 40 38 59 28 95 26 64 12 31 1 7 68 77 10 58 29 98 79 20 87 23 15 48 97 41 9 46 34 91 89 45 85 66 75 80 72 90

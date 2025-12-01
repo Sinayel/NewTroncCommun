@@ -5,100 +5,83 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/27 00:47:24 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/31 01:23:24 by yanis            ###   ########.fr       */
+/*   Created: 2025/10/04 00:28:13 by yanis             #+#    #+#             */
+/*   Updated: 2025/12/01 14:58:17 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../include/so_long.h"
 
-t_data *get_data(void)
+t_env	*get_data(void)
 {
-	static t_data data;
+	static t_env	data;
+
 	return (&data);
 }
 
-void	free_tabtab(char **argv)
-{
-	int	i;
-
-	i = 0;
-	if (!argv)
-		return ;
-	while (argv[i])
-	{
-		free(argv[i]);
-		i++;
-	}
-	free(argv);
-}
-
-int strlenStack(t_stack *stack)
-{
-	t_stack	*tmp;
-	int i;
-	i = 0;
-	tmp = stack;
-	while(tmp)
-	{
-		tmp = tmp->next;
-		i++;
-	}
-	return i;
-}
-
-int tabLen(char **argv)
-{
-    int i = 0;
-    while(argv[i])
-        i++;
-    return i;
-}
-
-int	is_digit_tab(char *argv)
+void	putstr_fd(char *str, int fd)
 {
 	int	i;
 
 	i = -1;
-	while (argv[++i])
-	{
-		if(argv[i] == '-' && i == 0)
-		{
-			i++;
-			if (!ft_isdigit(argv[i]) || argv[i] == '0')
-				return (0);
-		}
-		else if(!ft_isdigit(argv[i]))
-			return (0);
-	}
-	return (1);
+	while (str[++i])
+		write(fd, &str[i], 1);
 }
 
-int	find_min(t_stack *stack)
+void	print_error(int i)
 {
-	int min;
+	t_env	*env;
 
-	if (!stack)
-		return (0);
-	min = stack->value;
-	while (stack)
+	env = get_data();
+	if (i == 1)
 	{
-		if (stack->value < min)
-			min = stack->value;
-		stack = stack->next;
+		env->img.gnl_error = 1;
+		putstr_fd("Error\n", 2);
+		putstr_fd("You have to put the same len of each line for the map\n", 2);
 	}
-	return (min);
+	else if (i == 2)
+	{
+		env->img.gnl_error = 1;
+		putstr_fd("Error\nWrong map maybe try to lock the map\n", 2);
+	}
+	else if (i == 3)
+		putstr_fd("Error\nAll the object as to be foundable\n", 2);
+	else if (i == 4)
+		putstr_fd("Error\nToo many/less P or E\n", 2);
+	else if (i == 5)
+		putstr_fd("Error\nWrong inputs in the map\n", 2);
+	else if (i == 6)
+		putstr_fd("Error\nAdd some object to the map\n", 2);
 }
 
-int	index_of(t_stack *stack, int value)
+int	ft_strlen_map(char *str)
 {
-	int i = 0;
-	while (stack)
-	{
-		if (stack->value == value)
-			return (i);
-		stack = stack->next;
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] != '\n')
 		i++;
+	return (i);
+}
+
+int	count_lines(char *url_map)
+{
+	int		fd;
+	char	*line;
+	int		count;
+
+	fd = open(url_map, O_RDONLY);
+	if (fd == -1)
+		return (-1);
+	count = 0;
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (*line != '\n')
+			count++;
+		free(line);
+		line = get_next_line(fd);
 	}
-	return (-1);
+	close(fd);
+	return (count);
 }

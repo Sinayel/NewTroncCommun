@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 19:21:46 by ylouvel           #+#    #+#             */
-/*   Updated: 2025/10/31 03:00:34 by yanis            ###   ########.fr       */
+/*   Updated: 2025/11/21 13:40:28 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_push(t_stack **from, t_stack **to, char name)
 	*to = tmp;
 	data->count++;
 	(void)name;
-    // printf("p%c\n", name);
+    printf("p%c\n", name);
 }
 
 void	ft_rotate(t_stack **stack, char name)
@@ -47,7 +47,7 @@ void	ft_rotate(t_stack **stack, char name)
 	first->next = NULL;
 	data->count++;
 	(void)name;
-	// printf("r%c\n", name);
+	printf("r%c\n", name);
 }
 
 void	ft_swap(t_stack **stack, char name)

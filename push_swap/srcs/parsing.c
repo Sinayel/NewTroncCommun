@@ -5,97 +5,95 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/27 01:27:30 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/31 01:58:10 by yanis            ###   ########.fr       */
+/*   Created: 2025/10/04 00:29:29 by yanis             #+#    #+#             */
+/*   Updated: 2025/12/01 14:53:16 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
-#include <stddef.h>
+#include "../include/so_long.h"
 
-long	ft_atol(const char *str)
+int	exit_error(int i)
 {
-	long	result;
-	int		sign;
-	int		i;
-
-	result = 0;
-	sign = 1;
-	i = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		result = result * 10 + (str[i] - '0');
-		i++;
-	}
-	return (result * sign);
+	if(i == 1)
+		putstr_fd("Error\nNo map was found try a files who exist\n", 2);
+	else if(i == 2)
+		putstr_fd("Error\nPlease only 2 arguments is required\n", 2);
+	return (0);
 }
 
-void	print_error(void)
+int	fail(int i)
 {
-	t_data *data;
-	data = get_data();
-	if(data->args && data->split == 1)
-		free_tabtab(data->args);
-	printf("Error\n");
-	exit(1);
+	if (i == 1)
+		print_error(5);
+	else if (i == 2)
+		print_error(6);
+	else
+		print_error(2);
+	return (0);
 }
 
-void	check_argv(int argc, char *argv[], int input_verif)
+int	parsing(t_env *env)
 {
-	int		i;
-	int		j;
-	long	nb;
+	int	x;
+	int	y;
 
-	i = 1;
-	if(input_verif == 0)
-		i = 0;
-	while (i < argc)
+	x = 0;
+	y = 0;
+	while (env->img.map[x])
 	{
-		if (!is_digit_tab(argv[i]))
-			print_error();
-		nb = ft_atol(argv[i]);
-		if (nb > INT_MAX || nb < INT_MIN)
-			print_error();
-		j = i;
-		while (++j < argc)
-			if (ft_atol(argv[j]) == nb)
-				print_error();
-		i++;
+		y = 0;
+		while (env->img.map[x][y])
+		{
+			if (((x == 0 || x == env->img.x - 1 || y == 0 || y == env->img.y
+						- 1) && env->img.map[x][y] != '1')
+				|| !check_elem(env->img.map[x][y], env))
+				return (fail(env->img.i));
+			if (env->img.map[x][y] == 'P' || env->img.map[x][y] == 'E'
+				|| env->img.map[x][y] == 'C')
+				define_spawn(x, y, env->img.map);
+			y++;
+		}
+		x++;
 	}
-	if(argc == 1)
-		if(!is_digit_tab(argv[0]))
-			print_error();
-	// printf("All good\n");
+	if(env->img.count_c == 0)
+		return fail(2);
+	return (1);
 }
 
-t_data	*parsing(int argc, char *argv[])
+void	define_spawn(int x, int y, char **map)
 {
-	t_data *data;
+	t_env	*env;
 
-	data = get_data();
-	if (!data)
-		return (NULL);
-	if (argc == 2)
+	env = get_data();
+	if (map[x][y] == 'P')
 	{
-		data->args = ft_split(argv[1], ' '); //! A free !!!
-		data->split = 1;
-		check_argv(tabLen(data->args), data->args, 0);
-		return (data);
+		env->img.spawn_x = x;
+		env->img.spawn_y = y;
 	}
-	else if (argc > 2)
-	{
-		data->args = argv;
-		data->split = 0;
-		check_argv(argc, argv, 1);
-		return (data);
-	}
-	return (NULL);
+	if (map[x][y] == 'C')
+		env->img.count_c++;
+	if (map[x][y] == 'E')
+		env->img.count_e++;
+}
+
+void	check_path(char **map, int x, int y)
+{
+	t_env	*env;
+
+	env = get_data();
+	if (x < 0 || y < 0 || !map[x] || map[x][y] == '\0')
+		return ;
+	if (map[x][y] == '1' || map[x][y] == 'V')
+		return ;
+	if (map[x][y] == 'P')
+		env->img.found_p++;
+	if (map[x][y] == 'E')
+		env->img.found_e++;
+	if (map[x][y] == 'C')
+		env->img.found_c++;
+	map[x][y] = 'V';
+	check_path(map, x - 1, y);
+	check_path(map, x, y + 1);
+	check_path(map, x + 1, y);
+	check_path(map, x, y - 1);
 }
