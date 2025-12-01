@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:28:13 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/09 17:40:28 by yanis            ###   ########.fr       */
+/*   Updated: 2025/12/01 14:58:17 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,11 @@ void	print_error(int i)
 	else if (i == 3)
 		putstr_fd("Error\nAll the object as to be foundable\n", 2);
 	else if (i == 4)
-		putstr_fd("Error\nToo many P or E\n", 2);
+		putstr_fd("Error\nToo many/less P or E\n", 2);
 	else if (i == 5)
 		putstr_fd("Error\nWrong inputs in the map\n", 2);
+	else if (i == 6)
+		putstr_fd("Error\nAdd some object to the map\n", 2);
 }
 
 int	ft_strlen_map(char *str)

@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 05:12:27 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/11 20:41:22 by yanis            ###   ########.fr       */
+/*   Updated: 2025/11/26 20:21:48 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	render_map(void)
 		}
 		x++;
 	}
-	mv_str = ft_itoa(env->img.mv_count);
 	display_image(env, "sprites/kitty.xpm", env->img.spawn_x * 40,
 		env->img.spawn_y * 40);
+	mv_str = ft_itoa(env->img.mv_count);
 	mlx_string_put(env->mlx, env->win, 0, 10, 0xFF0000, mv_str);
 	free(mv_str);
 	return (0);
@@ -57,14 +57,12 @@ void	display_choice(char c, t_env *env, int x, int y)
 {
 	if (c == '1')
 		display_image(env, "sprites/terrain.xpm", x * 40, y * 40);
-	else if (c == '0')
+	else if (c == '0' || c == 'P')
 		display_image(env, "sprites/fond.xpm", x * 40, y * 40);
 	else if (c == 'E')
 		display_image(env, "sprites/rainbow.xpm", x * 40, y * 40);
 	else if (c == 'C')
 		display_image(env, "sprites/strawberry.xpm", x * 40, y * 40);
-	else if (c == 'P')
-		display_image(env, "sprites/fond.xpm", x * 40, y * 40);
 }
 
 void	clean_exit(t_env *env)

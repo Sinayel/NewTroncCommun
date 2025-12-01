@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:30:51 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/11 21:13:27 by yanis            ###   ########.fr       */
+/*   Updated: 2025/12/01 14:52:13 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,10 @@ typedef struct s_data
 	int		spawn_x;
 	int		spawn_y;
 	int		count_c;
+	int 	count_e;
 	int		found_c;
 	int		found_e;
 	int		found_p;
-	int		key_w;
-	int		key_a;
-	int		key_s;
-	int		key_d;
 	int		gnl_error;
 	char	**map;
 	void	*img;

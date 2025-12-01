@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:29:29 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/11 20:40:08 by yanis            ###   ########.fr       */
+/*   Updated: 2025/12/01 14:53:16 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	fail(int i)
 {
 	if (i == 1)
 		print_error(5);
+	else if (i == 2)
+		print_error(6);
 	else
 		print_error(2);
 	return (0);
@@ -53,6 +55,8 @@ int	parsing(t_env *env)
 		}
 		x++;
 	}
+	if(env->img.count_c == 0)
+		return fail(2);
 	return (1);
 }
 
@@ -68,6 +72,8 @@ void	define_spawn(int x, int y, char **map)
 	}
 	if (map[x][y] == 'C')
 		env->img.count_c++;
+	if (map[x][y] == 'E')
+		env->img.count_e++;
 }
 
 void	check_path(char **map, int x, int y)

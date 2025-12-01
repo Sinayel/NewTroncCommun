@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:01:30 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/31 02:27:36 by yanis            ###   ########.fr       */
+/*   Updated: 2025/12/01 14:52:36 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ t_env	*init_all(t_env *env, char *url_map)
 {
 	env->img.map = malloc(sizeof(char *) * (count_lines(url_map) + 1));
 	env->img.count_c = 0;
+	env->img.count_e = 0;
 	env->img.found_c = 0;
 	env->img.found_p = 0;
 	env->img.x = 0;
@@ -90,7 +91,6 @@ int	main(int argc, char *argv[])
 
 	if (argc == 2)
 	{
-		printf("Gros Caca\n");
 		env = get_data();
 		fd = open(argv[1], O_RDONLY);
 		if (fd == -1)

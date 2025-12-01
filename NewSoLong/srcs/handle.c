@@ -6,7 +6,7 @@
 /*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 22:57:35 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/11 21:03:37 by yanis            ###   ########.fr       */
+/*   Updated: 2025/12/01 14:16:08 by yanis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	handle_key(int keycode, t_env *env)
 	new_x = env->img.spawn_x;
 	new_y = env->img.spawn_y;
 	if ((keycode == 122 || keycode == 115 || keycode == 113 || keycode == 100)
-		|| (keycode == 65361 && keycode <= 65364))
+		|| (keycode >= 65361 && keycode <= 65364))
 		handle_keycode(keycode, &new_x, &new_y);
 	if (env->img.map[new_x][new_y] == 'C' && env->img.obj < env->img.count_c)
 	{
