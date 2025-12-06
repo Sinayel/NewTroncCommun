@@ -1,6 +1,0 @@
-{
-   name
-   Memcheck:Param
-   writev(vector[0])
-   fun:writev
-}

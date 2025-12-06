@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylouvel <ylouvel@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 00:47:26 by yanis             #+#    #+#             */
-/*   Updated: 2025/10/31 01:59:08 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/28 12:48:22 by ylouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ t_stack	*init_stack(int argc, char *argv[])
 		i = 0;
 	while (++i < tabLen(data->args))
 		stack = add_front(stack, ft_atoi(data->args[i]), -1);
-	if(data->args && data->split == 1)
-		free_tabtab(data->args);
 	assign_index(stack);
 	return (stack);
 }

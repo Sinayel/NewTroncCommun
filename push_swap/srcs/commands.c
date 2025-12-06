@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylouvel <ylouvel@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 19:21:46 by ylouvel           #+#    #+#             */
-/*   Updated: 2025/11/21 13:40:28 by yanis            ###   ########.fr       */
+/*   Updated: 2025/10/28 12:56:31 by ylouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ft_push(t_stack **from, t_stack **to, char name)
 	tmp->next = *to;
 	*to = tmp;
 	data->count++;
-	(void)name;
     printf("p%c\n", name);
 }
 
@@ -46,49 +45,7 @@ void	ft_rotate(t_stack **stack, char name)
 	last->next = first;
 	first->next = NULL;
 	data->count++;
-	(void)name;
 	printf("r%c\n", name);
 }
 
-void	ft_swap(t_stack **stack, char name)
-{
-	t_stack *first;
-	t_stack *second;
-	t_data *data;
 
-	data = get_data();
-	if (!*stack || !(*stack)->next)
-		return;
-	first = *stack;
-	second = first->next;
-	first->next = second->next;
-	second->next = first;
-	*stack = second;
-	data->count++;
-	printf("s%c\n", name);
-}
-
-void	ft_reverse_rotate(t_stack **stack, char name)
-{
-	t_stack *prev;
-	t_stack *last;
-	t_stack *head;
-	t_data *data;
-
-	data = get_data();
-	if (!*stack || !(*stack)->next)
-		return;
-	head = *stack;
-	prev = NULL;
-	last = *stack;
-	while (last->next)
-	{
-		prev = last;
-		last = last->next;
-	}
-	prev->next = NULL;
-	last->next = head;
-	*stack = last;
-	data->count++;
-	printf("rr%c\n", name);
-}

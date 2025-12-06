@@ -3,85 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yanis <yanis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ylouvel <ylouvel@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/04 00:28:13 by yanis             #+#    #+#             */
-/*   Updated: 2025/12/01 14:58:17 by yanis            ###   ########.fr       */
+/*   Created: 2025/10/27 00:47:24 by yanis             #+#    #+#             */
+/*   Updated: 2025/10/27 20:27:42 by ylouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/push_swap.h"
 
-t_env	*get_data(void)
+t_stack	*get_dataS(void)
 {
-	static t_env	data;
+	static t_stack stack;
+	return (&stack);
+}
 
+t_data *get_data(void)
+{
+	static t_data data;
 	return (&data);
 }
 
-void	putstr_fd(char *str, int fd)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-		write(fd, &str[i], 1);
-}
-
-void	print_error(int i)
-{
-	t_env	*env;
-
-	env = get_data();
-	if (i == 1)
-	{
-		env->img.gnl_error = 1;
-		putstr_fd("Error\n", 2);
-		putstr_fd("You have to put the same len of each line for the map\n", 2);
-	}
-	else if (i == 2)
-	{
-		env->img.gnl_error = 1;
-		putstr_fd("Error\nWrong map maybe try to lock the map\n", 2);
-	}
-	else if (i == 3)
-		putstr_fd("Error\nAll the object as to be foundable\n", 2);
-	else if (i == 4)
-		putstr_fd("Error\nToo many/less P or E\n", 2);
-	else if (i == 5)
-		putstr_fd("Error\nWrong inputs in the map\n", 2);
-	else if (i == 6)
-		putstr_fd("Error\nAdd some object to the map\n", 2);
-}
-
-int	ft_strlen_map(char *str)
+void	free_tabtab(char **argv)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] && str[i] != '\n')
+	if (!argv)
+		return ;
+	while (argv[i])
+	{
+		free(argv[i]);
 		i++;
-	return (i);
+	}
+	free(argv);
 }
 
-int	count_lines(char *url_map)
+int strlenStack(t_stack *stack)
 {
-	int		fd;
-	char	*line;
-	int		count;
-
-	fd = open(url_map, O_RDONLY);
-	if (fd == -1)
-		return (-1);
-	count = 0;
-	line = get_next_line(fd);
-	while (line)
+	t_stack	*tmp;
+	int i;
+	i = 0;
+	tmp = stack;
+	while(tmp)
 	{
-		if (*line != '\n')
-			count++;
-		free(line);
-		line = get_next_line(fd);
+		tmp = tmp->next;
+		i++;
 	}
-	close(fd);
-	return (count);
+	return i;
+}
+
+int tabLen(char **argv)
+{
+    int i = 0;
+    while(argv[i])
+        i++;
+    return i;
+}
+
+int	is_digit_tab(char *argv)
+{
+	int	i;
+
+	i = -1;
+	while (argv[++i])
+	{
+		if(argv[i] == '-' && i == 0)
+		{
+			i++;
+			if (!ft_isdigit(argv[i]) || argv[i] == '0')
+				return (0);
+		}
+		else if(!ft_isdigit(argv[i]))
+			return (0);
+	}
+	return (1);
 }
